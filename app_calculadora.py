@@ -74,7 +74,7 @@ tipo_ic = st.sidebar.selectbox(
         "Media — Varianza poblacional DESCONOCIDA",
         "Varianza",
         "Proporción",
-        "Diferencia de medias - Varianzas poblacionales CONOCIDAS"
+        "Diferencia de Medias — Varianzas poblacionales CONOCIDAS"
     ]
 )
 
