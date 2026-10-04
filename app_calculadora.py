@@ -143,6 +143,8 @@ if confianza_sel == "Otro":
 else:
     confianza = float(confianza_sel.replace("%", "")) / 100.0
 
+st.sidebar.image("esquema.png", use_container_width=True)
+
 # Estilo CSS para mejorar presentación de fórmulas y resultados
 st.markdown("""
 <style>
