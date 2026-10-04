@@ -655,7 +655,8 @@ elif tipo_ic == "Comparación de Varianzas (σ₁² / σ₂²)":
             r" n_1-1, n_2-1}} \leq \frac{\sigma_1^2}{\sigma_2^2} \leq \frac{S_1^2"
             r" / S_2^2}{F_{{\alpha \over 2}, n_1-1, n_2-1}} \right] = 1-\alpha}"
         )
-        st.latex(r"\small X_1 \sim 
+        st.latex( r"\small X_1 \sim N(\mu ; \sigma) \quad | \quad X_2 \sim N(\mu ; \sigma)")
+        st.latex(
             r"{\small F_{obs} = \frac{S_1^2 / \sigma_1^2}{S_2^2 /"
             r" \sigma_2^2} \sim F(df_1 = n_1 - 1, \, df_2 = n_2 - 1)}"
         )
