@@ -659,7 +659,7 @@ elif tipo_ic == "Diferencia de Proporciones":
             r" Z_{1-{\alpha \over 2}} \cdot \sqrt{{\hat{p}_1(1-\hat{p}_1) \over"
             r" n_1} + {\hat{p}_2(1-\hat{p}_2) \over n_2}} \right] = 1-\alpha"
         )
-        st.latex( r"\small X_1 \sim Bi(n_1 ; p_1) \quad | \quad X_2 \sim Bi(n_1 ; p_1)")
+        st.latex( r"\small X_1 \sim Bi(n_1 ; p_1) \quad | \quad X_2 \sim Bi(n_2 ; p_2)")
         st.latex(
             r"\small \hat{p}_1 \sim N\left(p_1 ; \sqrt{p_1(1-p_1) \over n_1}\right)"
             r" \quad | \quad \hat{p}_2 \sim N\left(p_2 ; \sqrt{p_2(1-p_2) \over"
