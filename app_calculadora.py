@@ -112,7 +112,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 st.write("Elaborado por la Profesora Dra. Natalia Salaberry")
-st.write("Seleccione el tipo de intervalo que desea calcular y el nivel de confianza en el menu lateral e ingrese a continuación los datos correspondientes.")
+st.write("Seleccione el tipo de intervalo que desea calcular y el nivel de confianza en el menu lateral e ingrese a continuación los valores correspondientes.")
 
 # Lateral para selección del tipo de IC
 tipo_ic = st.sidebar.selectbox(
