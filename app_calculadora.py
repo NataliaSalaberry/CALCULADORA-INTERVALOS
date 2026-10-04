@@ -77,23 +77,21 @@ def ic_dif_medias_varianzas_desconocidas_iguales(x_barra1, x_barra2, s1, s2, n1,
     inf, sup = dif_medias - me, dif_medias + me
     return (inf, sup), t, ee, me, dif_medias, df
 
-def ic_cociente_varianzas(s1, s2, n1, n2, confianza):
+def ic_dif_proporciones(p1_hat, p2_hat, n1, n2, confianza):
     alpha = 1 - confianza
-    df1 = n1 - 1
-    df2 = n2 - 1
+    z = stats.norm.ppf(1 - alpha / 2)
 
-    # Valores críticos de la distribución F
-    f_inferior = stats.f.ppf(alpha / 2, df1, df2)
-    f_superior = stats.f.ppf(1 - alpha / 2, df1, df2)
+    # Error estándar para la diferencia de proporciones
+    ee = np.sqrt(
+        (p1_hat * (1 - p1_hat) / n1) + (p2_hat * (1 - p2_hat) / n2)
+    )
 
-    # Estimación puntual del cociente de varianzas muestrales
-    cociente_var = (s1**2) / (s2**2)
+    # Margen de error y estimación puntual
+    me = z * ee
+    dif_prop = p1_hat - p2_hat
 
-    # Límites del intervalo de confianza para (sigma1^2 / sigma2^2)
-    inf = cociente_var / f_superior
-    sup = cociente_var / f_inferior
-
-    return (inf, sup), f_inferior, f_superior, cociente_var, df1, df2
+    inf, sup = dif_prop - me, dif_prop + me
+    return (inf, sup), z, ee, me, dif_prop
 
 # ──────────────────────────────────────────────
 # INTERFAZ DE USUARIO (STREAMLIT)
@@ -112,7 +110,7 @@ tipo_ic = st.sidebar.selectbox(
         "Proporción",
         "Diferencia de Medias — Vars CONOCIDAS",
         "Diferencia de Medias — Vars DESCONOCIDAS (Iguales)",
-        "Comparación de Varianzas (σ₁² / σ₂²)"
+        "Diferencia de Proporciones"
     ]
 )
 
@@ -583,50 +581,53 @@ elif (tipo_ic== "Diferencia de Medias — Vars DESCONOCIDAS (Iguales)"):
         ax2.grid(True, alpha=0.3)
         st.pyplot(fig2)
 
-# COCIENTE DE VARIANZAS
-elif tipo_ic == "Comparación de Varianzas (σ₁² / σ₂²)":
-    st.header("IC para el Cociente de Varianzas (σ₁² / σ₂²)")
+
+# DIFERENCIA DE PROPORCIONES
+elif tipo_ic == "Diferencia de Proporciones":
+    st.header("IC para la Diferencia de Proporciones (p₁ - p₂)")
 
     col1, col2 = st.columns(2)
     with col1:
         st.subheader("Muestra 1")
-        s1 = st.number_input(
-            "Desviación estándar muestral (S₁):",
-            value=1.0,
-            min_value=0.0001,
-            key="s1_var",
+        p1_hat = st.number_input(
+            "Proporción muestral p̂₁ (entre 0 y 1):",
+            value=0.50,
+            min_value=0.0,
+            max_value=1.0,
+            key="p1",
         )
         n1 = st.number_input(
-            "Tamaño de muestra (n₁):", value=30, min_value=2, key="n1_var"
+            "Tamaño de muestra (n₁):", value=30, min_value=1, key="n1_p"
         )
 
     with col2:
         st.subheader("Muestra 2")
-        s2 = st.number_input(
-            "Desviación estándar muestral (S₂):",
-            value=1.0,
-            min_value=0.0001,
-            key="s2_var",
+        p2_hat = st.number_input(
+            "Proporción muestral p̂₂ (entre 0 y 1):",
+            value=0.40,
+            min_value=0.0,
+            max_value=1.0,
+            key="p2",
         )
         n2 = st.number_input(
-            "Tamaño de muestra (n₂):", value=30, min_value=2, key="n2_var"
+            "Tamaño de muestra (n₂):", value=30, min_value=1, key="n2_p"
         )
-
+    
+        
     if st.button("Calcular Intervalo"):
-        # Llamada a la función
-        (intervalo,f_inf,f_sup,cociente_var,df1,df2,) = ic_cociente_varianzas(s1, s2, n1, n2, confianza)
+        # Llamada a la función de diferencia de proporciones
+        intervalo, Z, ee, me, dif_prop = ic_dif_proporciones(p1_hat, p2_hat, n1, n2, confianza)
         inf, sup = intervalo
 
         st.markdown(
             f'<div class="result-box"><b>Intervalo calculado:</b><br>IC [{inf:.4f}'
-            f" ≤ σ₁² / σ₂² ≤ {sup:.4f}] = {confianza*100:.2f}%</div>",
+            f" ≤ p₁ - p₂ ≤ {sup:.4f}] = {confianza*100:.2f}%</div>",
             unsafe_allow_html=True,
         )
 
-        st.write(f"**Cociente muestral (S₁² / S₂²):** {cociente_var:.4f}")
-        st.write(f"**Valor crítico F inferior (α/2):** {f_inf:.4f}")
-        st.write(f"**Valor crítico F superior (1-α/2):** {f_sup:.4f}")
-        st.write(f"**Grados de libertad:** df₁ = {df1}, df₂ = {df2}")
+        st.write(f"**Valor crítico Z:** {Z:.4f}")
+        st.write(f"**Error estándar:** {ee:.4f}")
+        st.write(f"**Margen de error:** ± {me:.4f}")
 
         # Gráfico de Intervalo
         fig1, ax1 = plt.subplots(figsize=(6, 1.02))
@@ -639,45 +640,48 @@ elif tipo_ic == "Comparación de Varianzas (σ₁² / σ₂²)":
         ax1.set_ylim(0.4, 1.6)
         ax1.set_yticks([])
         ax1.tick_params(axis="both", labelsize=7)
-        ax1.set_xlabel("Escala del Cociente de Varianzas (σ₁² / σ₂²)", fontsize=7)
+        ax1.set_xlabel(
+            "Escala de la Diferencia de Proporciones (p₁ - p₂)", fontsize=7
+        )
         ax1.set_title("Gráfico del Intervalo de Confianza", fontsize=9)
         ax1.legend(loc="lower right", fontsize=7)
-
         rango = sup - inf if (sup - inf) > 0 else 1.0
-        ax1.set_xlim(max(0, inf - rango * 0.2), sup + rango * 0.2)
+        ax1.set_xlim(inf - rango * 0.2, sup + rango * 0.2)
         ax1.grid(True, axis="x", alpha=0.3)
         st.pyplot(fig1)
 
         # Fórmulas en LaTeX
         st.subheader("Modelos Teóricos y Fórmulas")
         st.latex(
-            r"{\small IC \left[ \frac{S_1^2 / S_2^2}{F_{1-{\alpha \over 2},"
-            r" n_1-1, n_2-1}} \leq \frac{\sigma_1^2}{\sigma_2^2} \leq \frac{S_1^2"
-            r" / S_2^2}{F_{{\alpha \over 2}, n_1-1, n_2-1}} \right] = 1-\alpha}"
+            r"IC \left[ (\hat{p}_1 - \hat{p}_2) - Z_{1-{\alpha \over 2}} \cdot"
+            r" \sqrt{{\hat{p}_1(1-\hat{p}_1) \over n_1} + {\hat{p}_2(1-\hat{p}_2)"
+            r" \over n_2}} \leq p_1 - p_2 \leq (\hat{p}_1 - \hat{p}_2) +"
+            r" Z_{1-{\alpha \over 2}} \cdot \sqrt{{\hat{p}_1(1-\hat{p}_1) \over"
+            r" n_1} + {\hat{p}_2(1-\hat{p}_2) \over n_2}} \right] = 1-\alpha"
         )
-        st.latex( r"\small X_1 \sim N(\mu ; \sigma) \quad | \quad X_2 \sim N(\mu ; \sigma)")
+        st.latex( r"\small X_1 \sim Bi(n_1 ; p_1) \quad | \quad X_2 \sim Bi(n_1 ; p_1)")
         st.latex(
-            r"{\small F_{obs} = \frac{S_1^2 / \sigma_1^2}{S_2^2 /"
-            r" \sigma_2^2} \sim F(df_1 = n_1 - 1, \, df_2 = n_2 - 1)}"
+            r"\small \hat{p}_1 \sim N\left(p_1 ; \sqrt{p_1(1-p_1) \over n_1}\right)"
+            r" \quad | \quad \hat{p}_2 \sim N\left(p_2 ; \sqrt{p_2(1-p_2) \over"
+            r" n_2}\right)"
+        )
+        st.latex(
+            r"\small Z_{obs} = {(\hat{p}_1 - \hat{p}_2) - (p_1 - p_2) \over"
+            r" \sqrt{{\hat{p}_1(1-\hat{p}_1) \over n_1} + {\hat{p}_2(1-\hat{p}_2)"
+            r" \over n_2}}} \sim N(0;1)"
         )
 
-        # Gráfico Densidad F de Snedecor
+        # Gráfico Densidad Normal
         fig2, ax2 = plt.subplots(figsize=(8, 3.5))
-        # Determinar límite del eje X dinámicamente según la distribución F
-        x_max = max(f_sup * 1.5, 4.0)
-        x_vals = np.linspace(0.001, x_max, 500)
-        y_vals = stats.f.pdf(x_vals, df1, df2)
-
-        ax2.plot(x_vals, y_vals, label=f"F({df1}, {df2})", color="darkorange", lw=2)
-
-        x_fill = np.linspace(f_inf, f_sup, 200)
-        ax2.fill_between(x_fill,stats.f.pdf(x_fill, df1, df2),color="orange",alpha=0.4,label="Confianza",)
-        ax2.axvline(f_inf,color="coral",linestyle="--",linewidth=1.5,label=f"F_inf = {f_inf:.4f}",)
-        ax2.axvline(f_sup,color="coral",linestyle="--",linewidth=1.5,label=f"F_sup = {f_sup:.4f}",)
-
-        ax2.set_ylim(0, max(y_vals) * 1.1)
-        ax2.set_xlim(0, x_max)
-        ax2.set_title("Región de Confianza (Distribución F de Snedecor)")
+        x_vals = np.linspace(-4, 4, 500)
+        y_vals = stats.norm.pdf(x_vals, 0, 1)
+        ax2.plot(x_vals, y_vals, label="N(0,1)", color="darkorange", lw=2)
+        x_fill = np.linspace(-Z, Z, 200)
+        ax2.fill_between(x_fill,stats.norm.pdf(x_fill, 0, 1),color="orange",alpha=0.4,label="Confianza",)
+        ax2.axvline(-Z,color="coral",linestyle="--",linewidth=1.5,label=f"-Z = {-Z:.4f}",)
+        ax2.axvline(Z, color="coral", linestyle="--", linewidth=1.5, label=f"Z = {Z:.4f}")
+        ax2.set_ylim(0, max(y_vals) + 0.05)
+        ax2.set_title("Región de Confianza")
         ax2.legend()
         ax2.grid(True, alpha=0.3)
         st.pyplot(fig2)
