@@ -654,10 +654,10 @@ elif tipo_ic == "Diferencia de Proporciones":
         st.subheader("Modelos Teóricos y Fórmulas")
         st.latex(
             r"\small IC \left[ (\hat{p}_1 - \hat{p}_2) - Z_{1-{\alpha \over 2}} \cdot"
-            r" \sqrt{{\hat{p}_1(1-\hat{p}_1) \over n_1} + {\hat{p}_2(1-\hat{p}_2)"
-            r" \over n_2}} \leq p_1 - p_2 \leq (\hat{p}_1 - \hat{p}_2) +"
-            r" Z_{1-{\alpha \over 2}} \cdot \sqrt{{\hat{p}_1(1-\hat{p}_1) \over"
-            r" n_1} + {\hat{p}_2(1-\hat{p}_2) \over n_2}} \right] = 1-\alpha"
+            r"\small \sqrt{{\hat{p}_1(1-\hat{p}_1) \over n_1} + {\hat{p}_2(1-\hat{p}_2)"
+            r"\small \over n_2}} \leq p_1 - p_2 \leq (\hat{p}_1 - \hat{p}_2) +"
+            r"\small Z_{1-{\alpha \over 2}} \cdot \sqrt{{\hat{p}_1(1-\hat{p}_1) \over"
+            r"\small n_1} + {\hat{p}_2(1-\hat{p}_2) \over n_2}} \right] = 1-\alpha"
         )
         st.latex( r"\small X_1 \sim Bi(n_1 ; p_1) \quad | \quad X_2 \sim Bi(n_1 ; p_1)")
         st.latex(
