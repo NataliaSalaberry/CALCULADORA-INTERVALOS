@@ -1,5 +1,4 @@
 streamlit
-numpy
 scipy
+numpy
 matplotlib
-matplotlib.pyplot
