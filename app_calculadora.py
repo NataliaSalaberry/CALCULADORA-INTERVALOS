@@ -66,7 +66,7 @@ tipo_ic = st.sidebar.selectbox(
 # Confianza común para todos
 confianza_sel = st.sidebar.selectbox("Nivel de confianza:", ["90%", "95%", "99%", "Otro"])
 if confianza_sel == "Otro":
-    confianza = st.sidebar.slider("Valor de confianza personalizado:", min_value=0.01, max_value=0.99, value=0.95, step=0.01)
+    confianza = st.sidebar.slider("Valor de confianza personalizado:", min_value=0.01, max_value=0.99, value=0.95, step=0.001)
 else:
     confianza = float(confianza_sel.replace("%", "")) / 100.0
 
@@ -114,7 +114,7 @@ if tipo_ic == "Media — Varianza poblacional CONOCIDA":
         with fig_col1:
             # Gráfico de Intervalo
             fig1, ax1 = plt.subplots(figsize=(8, 3.5))
-            ax1.hlines(y=1, xmin=inf, xmax=sup, colors='crimson', linewidth=4, label=f'IC {confianza*100:.2f}%')
+            ax1.hlines(y=1, xmin=inf, xmax=sup, colors='crimson', linewidth=4, label=f'IC {confianza*100:.4f}%')
             ax1.plot([inf, inf], [0.85, 1.15], color='crimson', lw=2.5)
             ax1.plot([sup, sup], [0.85, 1.15], color='crimson', lw=2.5)
             ax1.plot(x_barra, 1, 'o', color='navy', markersize=10, label=f'Media x̄ = {x_barra}')
@@ -138,9 +138,9 @@ if tipo_ic == "Media — Varianza poblacional CONOCIDA":
             ax2.plot(x_vals, y_vals, label='N(0,1)', color='darkorange', lw=2)
             x_fill = np.linspace(-Z, Z, 200)
             ax2.fill_between(x_fill, stats.norm.pdf(x_fill, 0, 1), color='orange', alpha=0.4, label='Confianza')
-            ax2.axvline(-Z, color='coral', linestyle='--', linewidth=1.5, label=f'-Z = {-Z:.2f}')
-            ax2.axvline(Z, color='coral', linestyle='--', linewidth=1.5, label=f'Z = {Z:.2f}')
-            ax2.set_title("Región de Aceptación / Confianza")
+            ax2.axvline(-Z, color='coral', linestyle='--', linewidth=1.5, label=f'-Z = {-Z:.4f}')
+            ax2.axvline(Z, color='coral', linestyle='--', linewidth=1.5, label=f'Z = {Z:.4f}')
+            ax2.set_title("Región de Confianza")
             ax2.legend()
             ax2.grid(True, alpha=0.3)
             st.pyplot(fig2)
@@ -173,7 +173,7 @@ elif tipo_ic == "Media — Varianza poblacional DESCONOCIDA":
         fig_col1, fig_col2 = st.columns(2)
         with fig_col1:
             fig1, ax1 = plt.subplots(figsize=(8, 3.5))
-            ax1.hlines(y=1, xmin=inf, xmax=sup, colors='crimson', linewidth=4, label=f'IC {confianza*100:.2f}%')
+            ax1.hlines(y=1, xmin=inf, xmax=sup, colors='crimson', linewidth=4, label=f'IC {confianza*100:.4f}%')
             ax1.plot([inf, inf], [0.85, 1.15], color='crimson', lw=2.5)
             ax1.plot([sup, sup], [0.85, 1.15], color='crimson', lw=2.5)
             ax1.plot(x_barra, 1, 'o', color='navy', markersize=10, label=f'Media x̄ = {x_barra}')
@@ -196,9 +196,9 @@ elif tipo_ic == "Media — Varianza poblacional DESCONOCIDA":
             ax2.plot(x_vals, y_vals, label=f't-Student (gl={gl})', color='darkorange', lw=2)
             x_fill = np.linspace(-t, t, 200)
             ax2.fill_between(x_fill, stats.t.pdf(x_fill, df=gl), color='orange', alpha=0.4, label='Confianza')
-            ax2.axvline(-t, color='coral', linestyle='--', linewidth=1.5, label=f'-t = {-t:.2f}')
-            ax2.axvline(t, color='coral', linestyle='--', linewidth=1.5, label=f't = {t:.2f}')
-            ax2.set_title("Región de Aceptación / Confianza (t)")
+            ax2.axvline(-t, color='coral', linestyle='--', linewidth=1.5, label=f'-t = {-t:.4f}')
+            ax2.axvline(t, color='coral', linestyle='--', linewidth=1.5, label=f't = {t:.4f}')
+            ax2.set_title("Región de Confianza (t)")
             ax2.legend()
             ax2.grid(True, alpha=0.3)
             st.pyplot(fig2)
@@ -229,7 +229,7 @@ elif tipo_ic == "Varianza":
         fig_col1, fig_col2 = st.columns(2)
         with fig_col1:
             fig1, ax1 = plt.subplots(figsize=(8, 3.5))
-            ax1.hlines(y=1, xmin=var_inf, xmax=var_sup, colors='crimson', linewidth=4, label=f'IC {confianza*100:.2f}%')
+            ax1.hlines(y=1, xmin=var_inf, xmax=var_sup, colors='crimson', linewidth=4, label=f'IC {confianza*100:.4f}%')
             ax1.plot([var_inf, var_inf], [0.85, 1.15], color='crimson', lw=2.5)
             ax1.plot([var_sup, var_sup], [0.85, 1.15], color='crimson', lw=2.5)
             ax1.plot(s2, 1, 'o', color='navy', markersize=10, label=f'Varianza s² = {s2}')
@@ -252,9 +252,9 @@ elif tipo_ic == "Varianza":
             ax2.plot(x_vals, y_vals, label=f'Chi-Cuadrado (gl={gl})', color='darkorange', lw=2)
             x_fill = np.linspace(chi2_inf, chi2_sup, 200)
             ax2.fill_between(x_fill, stats.chi2.pdf(x_fill, df=gl), color='orange', alpha=0.4, label='Confianza')
-            ax2.axvline(chi2_inf, color='coral', linestyle='--', linewidth=1.5, label=f'χ²_inf = {chi2_inf:.2f}')
-            ax2.axvline(chi2_sup, color='coral', linestyle='--', linewidth=1.5, label=f'χ²_sup = {chi2_sup:.2f}')
-            ax2.set_title("Región de Aceptación / Confianza (χ²)")
+            ax2.axvline(chi2_inf, color='coral', linestyle='--', linewidth=1.5, label=f'χ²_inf = {chi2_inf:.4f}')
+            ax2.axvline(chi2_sup, color='coral', linestyle='--', linewidth=1.5, label=f'χ²_sup = {chi2_sup:.4f}')
+            ax2.set_title("Región de Confianza (χ²)")
             ax2.legend()
             ax2.grid(True, alpha=0.3)
             st.pyplot(fig2)
@@ -308,8 +308,8 @@ elif tipo_ic == "Proporción":
             ax2.plot(x_vals, y_vals, label='N(0,1)', color='darkorange', lw=2)
             x_fill = np.linspace(-z, z, 200)
             ax2.fill_between(x_fill, stats.norm.pdf(x_fill, 0, 1), color='orange', alpha=0.4, label='Confianza')
-            ax2.axvline(-z, color='coral', linestyle='--', linewidth=1.5, label=f'-Z = {-z:.2f}')
-            ax2.axvline(z, color='coral', linestyle='--', linewidth=1.5, label=f'Z = {z:.2f}')
+            ax2.axvline(-z, color='coral', linestyle='--', linewidth=1.5, label=f'-Z = {-z:.4f}')
+            ax2.axvline(z, color='coral', linestyle='--', linewidth=1.5, label=f'Z = {z:.4f}')
             ax2.set_title("Región de Aceptación / Confianza (Z)")
             ax2.legend()
             ax2.grid(True, alpha=0.3)
