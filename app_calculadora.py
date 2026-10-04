@@ -110,26 +110,26 @@ if tipo_ic == "Media — Varianza poblacional CONOCIDA":
         st.write(f"**Error estándar:** {ee:.4f}")
         st.write(f"**Margen de error:** ± {me:.4f}")
 
-        fig_col1 = st.columns(1)
+        #fig_col1 = st.columns(1)
 
-        with fig_col1:
-            # Gráfico de Intervalo
-            fig1, ax1 = plt.subplots(figsize=(8, 3.5))
-            ax1.hlines(y=1, xmin=inf, xmax=sup, colors='crimson', linewidth=4, label=f'IC {confianza*100:.4f}%')
-            ax1.plot([inf, inf], [0.85, 1.15], color='crimson', lw=2.5)
-            ax1.plot([sup, sup], [0.85, 1.15], color='crimson', lw=2.5)
-            #ax1.plot(x_barra, 1, 'o', color='navy', markersize=10, label=f'Media x̄ = {x_barra}')
-            ax1.text(inf, 1.25, f'Lim Inf: {inf:.4f}', horizontalalignment='center', fontweight='bold', color='crimson')
-            ax1.text(sup, 1.25, f'Lim Sup: {sup:.4f}', horizontalalignment='center', fontweight='bold', color='crimson')
-            ax1.set_ylim(0.4, 1.6)
-            ax1.set_yticks([])
-            ax1.set_xlabel('Escala de la Media (μ)')
-            ax1.set_title(f'Gráfico del Intervalo de Confianza')
-            ax1.legend(loc='lower right')
-            rango = sup - inf if (sup - inf) > 0 else 1.0
-            ax1.set_xlim(inf - rango*0.2, sup + rango*0.2)
-            ax1.grid(True, axis='x', alpha=0.3)
-            st.pyplot(fig1)
+        #with fig_col1:
+        # Gráfico de Intervalo
+        fig1, ax1 = plt.subplots(figsize=(8, 3.5))
+        ax1.hlines(y=1, xmin=inf, xmax=sup, colors='crimson', linewidth=4, label=f'IC {confianza*100:.4f}%')
+        ax1.plot([inf, inf], [0.85, 1.15], color='crimson', lw=2.5)
+        ax1.plot([sup, sup], [0.85, 1.15], color='crimson', lw=2.5)
+        #ax1.plot(x_barra, 1, 'o', color='navy', markersize=10, label=f'Media x̄ = {x_barra}')
+        ax1.text(inf, 1.25, f'Lim Inf: {inf:.4f}', horizontalalignment='center', fontweight='bold', color='crimson')
+        ax1.text(sup, 1.25, f'Lim Sup: {sup:.4f}', horizontalalignment='center', fontweight='bold', color='crimson')
+        ax1.set_ylim(0.4, 1.6)
+        ax1.set_yticks([])
+        ax1.set_xlabel('Escala de la Media (μ)')
+        ax1.set_title(f'Gráfico del Intervalo de Confianza')
+        ax1.legend(loc='lower right')
+        rango = sup - inf if (sup - inf) > 0 else 1.0
+        ax1.set_xlim(inf - rango*0.2, sup + rango*0.2)
+        ax1.grid(True, axis='x', alpha=0.3)
+        st.pyplot(fig1)
 
         
         # Fórmulas en LaTeX
