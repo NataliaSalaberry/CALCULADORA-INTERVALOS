@@ -114,8 +114,8 @@ if tipo_ic == "Media — Varianza poblacional CONOCIDA":
 
         #with fig_col1:
         # Gráfico de Intervalo
-        fig1, ax1 = plt.subplots(figsize=(6, 1))
-        ax1.hlines(y=1, xmin=inf, xmax=sup, colors='crimson', linewidth=4, label=f'IC {confianza*100:.4f}%')
+        fig1, ax1 = plt.subplots(figsize=(6, 1.2))
+        ax1.hlines(y=1, xmin=inf, xmax=sup, colors='crimson', linewidth=4, label=f'IC {confianza*100:.2f}%')
         ax1.plot([inf, inf], [0.85, 1.15], color='crimson', lw=2.5)
         ax1.plot([sup, sup], [0.85, 1.15], color='crimson', lw=2.5)
         #ax1.plot(x_barra, 1, 'o', color='navy', markersize=10, label=f'Media x̄ = {x_barra}')
@@ -150,6 +150,7 @@ if tipo_ic == "Media — Varianza poblacional CONOCIDA":
         ax2.fill_between(x_fill, stats.norm.pdf(x_fill, 0, 1), color='orange', alpha=0.4, label='Confianza')
         ax2.axvline(-Z, color='coral', linestyle='--', linewidth=1.5, label=f'-Z = {-Z:.4f}')
         ax2.axvline(Z, color='coral', linestyle='--', linewidth=1.5, label=f'Z = {Z:.4f}')
+        ax2.set_ylim(0,max(y_vals)+0.05)
         ax2.set_title("Región de Confianza")
         ax2.legend()
         ax2.grid(True, alpha=0.3)
