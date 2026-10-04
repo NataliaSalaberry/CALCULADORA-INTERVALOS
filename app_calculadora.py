@@ -167,7 +167,7 @@ if tipo_ic == "Media — Varianza poblacional CONOCIDA":
         st.write(f"**Valor crítico Z:** {Z:.4f}")
         st.write(f"**Error estándar:** {ee:.4f}")
         st.write(f"**Margen de error:** ± {me:.4f}")
-        st.write(f"**Amplitud IC:** ± {amplitud:.4f}")
+        st.write(f"**Amplitud IC:** {amplitud:.4f}")
 
         #fig_col1 = st.columns(1)
 
@@ -236,7 +236,7 @@ elif tipo_ic == "Media — Varianza poblacional DESCONOCIDA":
         st.write(f"**Valor crítico t:** {t:.4f}")
         st.write(f"**Error estándar:** {ee:.4f}")
         st.write(f"**Margen de error:** ± {me:.4f}")
-        st.write(f"**Amplitud IC:** ± {amplitud:.4f}")
+        st.write(f"**Amplitud IC:** {amplitud:.4f}")
 
         fig1, ax1 = plt.subplots(figsize=(6, 1.02))
         ax1.hlines(y=1, xmin=inf, xmax=sup, colors='crimson', linewidth=4, label=f'IC {confianza*100:.2f}%')
@@ -292,7 +292,7 @@ elif tipo_ic == "Varianza":
         
         st.markdown(f'<div class="result-box"><b>Intervalo calculado:</b><br>IC [{var_inf:.4f} ≤ σ² ≤ {var_sup:.4f}] = {confianza*100:.2f}%</div>', unsafe_allow_html=True)
 
-        st.write(f"**Amplitud IC:** ± {amplitud:.4f}")
+        st.write(f"**Amplitud IC:** {amplitud:.4f}")
         
         fig1, ax1 = plt.subplots(figsize=(6, 1.02))
         ax1.hlines(y=1, xmin=var_inf, xmax=var_sup, colors='crimson', linewidth=4, label=f'IC {confianza*100:.2f}%')
@@ -351,7 +351,7 @@ elif tipo_ic == "Proporción":
         st.write(f"**Valor crítico Z:** {z:.4f}")
         st.write(f"**Error estándar:** {ee:.4f}")
         st.write(f"**Margen de error:** ± {me:.4f}")
-        st.write(f"**Amplitud IC:** ± {amplitud:.4f}")
+        st.write(f"**Amplitud IC:** {amplitud:.4f}")
 
         fig1, ax1 = plt.subplots(figsize=(6, 1.02))
         ax1.hlines(y=1, xmin=inf, xmax=sup, colors='crimson', linewidth=4, label=f'IC {confianza*100:.2f}%')
@@ -436,7 +436,7 @@ elif tipo_ic == "Diferencia de Medias — Vars CONOCIDAS":
         st.write(f"**Valor crítico Z:** {Z:.4f}")
         st.write(f"**Error estándar:** {ee:.4f}")
         st.write(f"**Margen de error:** ± {me:.4f}")
-        st.write(f"**Amplitud IC:** ± {amplitud:.4f}")
+        st.write(f"**Amplitud IC:** {amplitud:.4f}")
 
         # Gráfico de Intervalo
         fig1, ax1 = plt.subplots(figsize=(6, 1.02))
@@ -544,7 +544,7 @@ elif (tipo_ic== "Diferencia de Medias — Vars DESCONOCIDAS (Iguales)"):
         st.write(f"**Valor crítico t ({df} g.l.):** {t:.4f}")
         st.write(f"**Error estándar:** {ee:.4f}")
         st.write(f"**Margen de error:** ± {me:.4f}")
-        st.write(f"**Amplitud IC:** ± {amplitud:.4f}")
+        st.write(f"**Amplitud IC:** {amplitud:.4f}")
 
         # Gráfico de Intervalo
         fig1, ax1 = plt.subplots(figsize=(6, 1.02))
@@ -642,7 +642,7 @@ elif tipo_ic == "Diferencia de Proporciones":
         st.write(f"**Valor crítico Z:** {Z:.4f}")
         st.write(f"**Error estándar:** {ee:.4f}")
         st.write(f"**Margen de error:** ± {me:.4f}")
-        st.write(f"**Amplitud IC:** ± {amplitud:.4f}")
+        st.write(f"**Amplitud IC:** {amplitud:.4f}")
         
 
         # Gráfico de Intervalo
