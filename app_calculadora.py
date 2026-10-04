@@ -123,7 +123,7 @@ tipo_ic = st.sidebar.selectbox(
 )
 
 # Confianza común para todos
-confianza_sel = st.sidebar.selectbox("Nivel de confianza:", ["90%", "95%", "99%", "Otro"])
+confianza_sel = st.sidebar.selectbox("Nivel de confianza:", ["","90%", "95%", "99%", "Otro"])
 if confianza_sel == "Otro":
     confianza = st.sidebar.number_input(
     "Valor de confianza personalizado:", 
