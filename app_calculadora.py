@@ -16,7 +16,8 @@ def ic_media_varianza_conocida(x_barra, sigma, n, confianza):
     ee = sigma / np.sqrt(n)
     me = z * ee
     inf, sup = x_barra - me, x_barra + me
-    return (inf, sup), z, ee, me
+    amplitud=sup-inf
+    return (inf, sup), z, ee, me, amplitud
 
 def ic_media_varianza_desconocida(x_barra, s, n, confianza):
     alpha = 1 - confianza
