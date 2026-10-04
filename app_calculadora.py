@@ -25,7 +25,8 @@ def ic_media_varianza_desconocida(x_barra, s, n, confianza):
     ee = s / np.sqrt(n)
     me = t * ee
     inf, sup = x_barra - me, x_barra + me
-    return (inf, sup), gl, t, ee, me
+    amplitud=sup-inf
+    return (inf, sup), gl, t, ee, me, amplitud
 
 def ic_varianza(s2, n, confianza):
     alpha = 1 - confianza
@@ -34,7 +35,8 @@ def ic_varianza(s2, n, confianza):
     chi2_sup = stats.chi2.ppf(1 - alpha / 2, df=gl)
     var_inf = (gl * s2) / chi2_sup
     var_sup = (gl * s2) / chi2_inf
-    return (var_inf, var_sup), gl, chi2_inf, chi2_sup
+    amplitud=var_sup-var_inf
+    return (var_inf, var_sup), gl, chi2_inf, chi2_sup, amplitud
 
 def ic_proporcion(p_hat, n, confianza):
     alpha = 1 - confianza
@@ -43,7 +45,8 @@ def ic_proporcion(p_hat, n, confianza):
     me = z * ee
     inf = max(0.0, p_hat - me)
     sup = min(1.0, p_hat + me)
-    return (inf, sup), z, ee, me
+    amplitud=sup-inf
+    return (inf, sup), z, ee, me, amplitud
 
 def ic_dif_medias_varianzas_conocidas(x_barra1, x_barra2, sigma1, sigma2, n1, n2, confianza):
     alpha = 1 - confianza
@@ -57,7 +60,8 @@ def ic_dif_medias_varianzas_conocidas(x_barra1, x_barra2, sigma1, sigma2, n1, n2
     dif_medias = x_barra1 - x_barra2
 
     inf, sup = dif_medias - me, dif_medias + me
-    return (inf, sup), z, ee, me, dif_medias
+    amplitud=sup-inf
+    return (inf, sup), z, ee, me, dif_medias, amplitud
 
 def ic_dif_medias_varianzas_desconocidas_iguales(x_barra1, x_barra2, s1, s2, n1, n2, confianza):
     alpha = 1 - confianza
@@ -75,7 +79,8 @@ def ic_dif_medias_varianzas_desconocidas_iguales(x_barra1, x_barra2, s1, s2, n1,
     dif_medias = x_barra1 - x_barra2
 
     inf, sup = dif_medias - me, dif_medias + me
-    return (inf, sup), t, ee, me, dif_medias, df
+    amplitud=sup-inf
+    return (inf, sup), t, ee, me, dif_medias, df, amplitud
 
 def ic_dif_proporciones(p1_hat, p2_hat, n1, n2, confianza):
     alpha = 1 - confianza
@@ -91,7 +96,8 @@ def ic_dif_proporciones(p1_hat, p2_hat, n1, n2, confianza):
     dif_prop = p1_hat - p2_hat
 
     inf, sup = dif_prop - me, dif_prop + me
-    return (inf, sup), z, ee, me, dif_prop
+    amplitud=sup-inf
+    return (inf, sup), z, ee, me, dif_prop, amplitud
 
 # ──────────────────────────────────────────────
 # INTERFAZ DE USUARIO (STREAMLIT)
@@ -152,7 +158,7 @@ if tipo_ic == "Media — Varianza poblacional CONOCIDA":
         n = st.number_input("Tamaño de muestra (n):", value=30, min_value=2)
     
     if st.button("Calcular Intervalo"):
-        intervalo, Z, ee, me = ic_media_varianza_conocida(x_barra, sigma, n, confianza)
+        intervalo, Z, ee, me, amplitud = ic_media_varianza_conocida(x_barra, sigma, n, confianza)
         inf, sup = intervalo
         
         st.markdown(f'<div class="result-box"><b>Intervalo calculado:</b><br>IC [{inf:.4f} ≤ μ ≤ {sup:.4f}] = {confianza*100:.2f}%</div>', unsafe_allow_html=True)
@@ -160,6 +166,7 @@ if tipo_ic == "Media — Varianza poblacional CONOCIDA":
         st.write(f"**Valor crítico Z:** {Z:.4f}")
         st.write(f"**Error estándar:** {ee:.4f}")
         st.write(f"**Margen de error:** ± {me:.4f}")
+        st.write(f"**Amplitud IC:** ± {amplitud:.4f}")
 
         #fig_col1 = st.columns(1)
 
@@ -219,7 +226,7 @@ elif tipo_ic == "Media — Varianza poblacional DESCONOCIDA":
         n = st.number_input("Tamaño de muestra (n):", value=30, min_value=2)
         
     if st.button("Calcular Intervalo"):
-        intervalo, gl, t, ee, me = ic_media_varianza_desconocida(x_barra, s, n, confianza)
+        intervalo, gl, t, ee, me, amplitud = ic_media_varianza_desconocida(x_barra, s, n, confianza)
         inf, sup = intervalo
         
         st.markdown(f'<div class="result-box"><b>Intervalo calculado:</b><br>IC [{inf:.4f} ≤ μ ≤ {sup:.4f}] = {confianza*100:.2f}%</div>', unsafe_allow_html=True)
@@ -228,6 +235,7 @@ elif tipo_ic == "Media — Varianza poblacional DESCONOCIDA":
         st.write(f"**Valor crítico t:** {t:.4f}")
         st.write(f"**Error estándar:** {ee:.4f}")
         st.write(f"**Margen de error:** ± {me:.4f}")
+        st.write(f"**Amplitud IC:** ± {amplitud:.4f}")
 
         fig1, ax1 = plt.subplots(figsize=(6, 1.02))
         ax1.hlines(y=1, xmin=inf, xmax=sup, colors='crimson', linewidth=4, label=f'IC {confianza*100:.2f}%')
@@ -278,11 +286,13 @@ elif tipo_ic == "Varianza":
         n = st.number_input("Tamaño de muestra (n):", value=30, min_value=2)
         
     if st.button("Calcular Intervalo"):
-        intervalo, gl, chi2_inf, chi2_sup = ic_varianza(s2, n, confianza)
+        intervalo, gl, chi2_inf, chi2_sup, amplitud = ic_varianza(s2, n, confianza)
         var_inf, var_sup = intervalo
         
         st.markdown(f'<div class="result-box"><b>Intervalo calculado:</b><br>IC [{var_inf:.4f} ≤ σ² ≤ {var_sup:.4f}] = {confianza*100:.2f}%</div>', unsafe_allow_html=True)
 
+        st.write(f"**Amplitud IC:** ± {amplitud:.4f}")
+        
         fig1, ax1 = plt.subplots(figsize=(6, 1.02))
         ax1.hlines(y=1, xmin=var_inf, xmax=var_sup, colors='crimson', linewidth=4, label=f'IC {confianza*100:.2f}%')
         ax1.plot([var_inf, var_inf], [0.85, 1.15], color='crimson', lw=2.5)
@@ -332,7 +342,7 @@ elif tipo_ic == "Proporción":
         n = st.number_input("Tamaño de muestra (n):", value=30, min_value=2)
         
     if st.button("Calcular Intervalo"):
-        intervalo, z, ee, me = ic_proporcion(p_hat, n, confianza)
+        intervalo, z, ee, me, amplitud = ic_proporcion(p_hat, n, confianza)
         inf, sup = intervalo
         
         st.markdown(f'<div class="result-box"><b>Intervalo calculado:</b><br>IC [{inf:.4f} ≤ p ≤ {sup:.4f}] = {confianza*100:.2f}%</div>', unsafe_allow_html=True)
@@ -340,6 +350,7 @@ elif tipo_ic == "Proporción":
         st.write(f"**Valor crítico Z:** {z:.4f}")
         st.write(f"**Error estándar:** {ee:.4f}")
         st.write(f"**Margen de error:** ± {me:.4f}")
+        st.write(f"**Amplitud IC:** ± {amplitud:.4f}")
 
         fig1, ax1 = plt.subplots(figsize=(6, 1.02))
         ax1.hlines(y=1, xmin=inf, xmax=sup, colors='crimson', linewidth=4, label=f'IC {confianza*100:.2f}%')
@@ -409,7 +420,7 @@ elif tipo_ic == "Diferencia de Medias — Vars CONOCIDAS":
 
     if st.button("Calcular Intervalo"):
         # Llamada a la función de diferencia de medias con sigmas conocidas
-        intervalo, Z, ee, me, dif_medias = ic_dif_medias_varianzas_conocidas(
+        intervalo, Z, ee, me, dif_medias, amplitud = ic_dif_medias_varianzas_conocidas(
             x_barra1, x_barra2, sigma1, sigma2, n1, n2, confianza
         )
         inf, sup = intervalo
@@ -424,6 +435,7 @@ elif tipo_ic == "Diferencia de Medias — Vars CONOCIDAS":
         st.write(f"**Valor crítico Z:** {Z:.4f}")
         st.write(f"**Error estándar:** {ee:.4f}")
         st.write(f"**Margen de error:** ± {me:.4f}")
+        st.write(f"**Amplitud IC:** ± {amplitud:.4f}")
 
         # Gráfico de Intervalo
         fig1, ax1 = plt.subplots(figsize=(6, 1.02))
@@ -516,6 +528,7 @@ elif (tipo_ic== "Diferencia de Medias — Vars DESCONOCIDAS (Iguales)"):
             me,
             dif_medias,
             df,
+            amplitud,
         ) = ic_dif_medias_varianzas_desconocidas_iguales(
             x_barra1, x_barra2, s1, s2, n1, n2, confianza
         )
@@ -530,6 +543,7 @@ elif (tipo_ic== "Diferencia de Medias — Vars DESCONOCIDAS (Iguales)"):
         st.write(f"**Valor crítico t ({df} g.l.):** {t:.4f}")
         st.write(f"**Error estándar:** {ee:.4f}")
         st.write(f"**Margen de error:** ± {me:.4f}")
+        st.write(f"**Amplitud IC:** ± {amplitud:.4f}")
 
         # Gráfico de Intervalo
         fig1, ax1 = plt.subplots(figsize=(6, 1.02))
@@ -615,7 +629,7 @@ elif tipo_ic == "Diferencia de Proporciones":
         
     if st.button("Calcular Intervalo"):
         # Llamada a la función de diferencia de proporciones
-        intervalo, Z, ee, me, dif_prop = ic_dif_proporciones(p1_hat, p2_hat, n1, n2, confianza)
+        intervalo, Z, ee, me, dif_prop, amplitud = ic_dif_proporciones(p1_hat, p2_hat, n1, n2, confianza)
         inf, sup = intervalo
 
         st.markdown(
