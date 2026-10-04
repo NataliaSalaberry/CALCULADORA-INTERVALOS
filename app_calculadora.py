@@ -115,6 +115,17 @@ st.write("Elaborado por la Profesora Dra. Natalia Salaberry")
 st.write("Seleccione el tipo de intervalo que desea calcular y el nivel de confianza en el menu lateral e ingrese a continuación los valores correspondientes.")
 
 # Lateral para selección del tipo de IC
+st.markdown(
+    """
+    <style>
+    [data-testid="stSidebar"] {
+        background-color: #FFE5D9; /* Naranja pastel */
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
 tipo_ic = st.sidebar.selectbox(
     "Tipo de Intervalo de Confianza:",
     [   "Seleccione un intervalo",
@@ -142,7 +153,7 @@ if confianza_sel == "Otro":
 else:
     confianza = float(confianza_sel.replace("%", "")) / 100.0
 
-# Estilo CSS para mejorar presentación de fórmulas y resultados
+# Estilo CSS para resultados
 st.markdown("""
 <style>
 .result-box {
