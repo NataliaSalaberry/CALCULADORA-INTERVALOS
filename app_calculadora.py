@@ -653,11 +653,11 @@ elif tipo_ic == "Diferencia de Proporciones":
         # Fórmulas en LaTeX
         st.subheader("Modelos Teóricos y Fórmulas")
         st.latex(
-            r"\small IC \left[ (\hat{p}_1 - \hat{p}_2) - Z_{1-{\alpha \over 2}} \cdot"
-            r"\small \sqrt{{\hat{p}_1(1-\hat{p}_1) \over n_1} + {\hat{p}_2(1-\hat{p}_2)"
-            r"\small \over n_2}} \leq p_1 - p_2 \leq (\hat{p}_1 - \hat{p}_2) +"
-            r"\small Z_{1-{\alpha \over 2}} \cdot \sqrt{{\hat{p}_1(1-\hat{p}_1) \over"
-            r"\small n_1} + {\hat{p}_2(1-\hat{p}_2) \over n_2}} \right] = 1-\alpha"
+            r"\footnotesize IC \left[ (\hat{p}_1 - \hat{p}_2) - Z_{1-{\alpha \over 2}} \cdot"
+            r"\footnotesize \sqrt{{\hat{p}_1(1-\hat{p}_1) \over n_1} + {\hat{p}_2(1-\hat{p}_2)"
+            r"\footnotesize \over n_2}} \leq p_1 - p_2 \leq (\hat{p}_1 - \hat{p}_2) +"
+            r"\footnotesize Z_{1-{\alpha \over 2}} \cdot \sqrt{{\hat{p}_1(1-\hat{p}_1) \over"
+            r"\footnotesize n_1} + {\hat{p}_2(1-\hat{p}_2) \over n_2}} \right] = 1-\alpha"
         )
         st.latex( r"\small X_1 \sim Bi(n_1 ; p_1) \quad | \quad X_2 \sim Bi(n_1 ; p_1)")
         st.latex(
