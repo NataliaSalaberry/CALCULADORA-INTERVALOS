@@ -240,7 +240,8 @@ elif tipo_ic == "Media — Varianza poblacional DESCONOCIDA":
         inf, sup = intervalo
         
         st.markdown(f'<div class="result-box"><b>Intervalo calculado:</b><br>IC [{inf:.4f} ≤ μ ≤ {sup:.4f}] = {confianza*100:.2f}%</div>', unsafe_allow_html=True)
-        
+
+        st.markdown("<h3 style='font-size: 18px;'>Componentes Clave</h3>",unsafe_allow_html=True,)
         st.write(f"**Grados de libertad (n-1):** {gl}")
         st.write(f"**Valor crítico t:** {t:.4f}")
         st.write(f"**Error estándar:** {ee:.4f}")
@@ -301,6 +302,10 @@ elif tipo_ic == "Varianza":
         
         st.markdown(f'<div class="result-box"><b>Intervalo calculado:</b><br>IC [{var_inf:.4f} ≤ σ² ≤ {var_sup:.4f}] = {confianza*100:.2f}%</div>', unsafe_allow_html=True)
 
+        st.markdown("<h3 style='font-size: 18px;'>Componentes Clave</h3>",unsafe_allow_html=True,)
+        st.write(f"**Grados de libertad (n-1):** {gl}")
+        st.write(f"**Valor crítico inferior:** {chi2_inf:.4f}")
+        st.write(f"**Valor crítico superior:** {chi2_sup:.4f}")
         st.write(f"**Amplitud IC:** {amplitud:.4f}")
         
         fig1, ax1 = plt.subplots(figsize=(6, 1.02))
@@ -356,7 +361,8 @@ elif tipo_ic == "Proporción":
         inf, sup = intervalo
         
         st.markdown(f'<div class="result-box"><b>Intervalo calculado:</b><br>IC [{inf:.4f} ≤ p ≤ {sup:.4f}] = {confianza*100:.2f}%</div>', unsafe_allow_html=True)
-        
+
+        st.markdown("<h3 style='font-size: 18px;'>Componentes Clave</h3>",unsafe_allow_html=True,)
         st.write(f"**Valor crítico Z:** {z:.4f}")
         st.write(f"**Error estándar:** {ee:.4f}")
         st.write(f"**Margen de error:** ± {me:.4f}")
@@ -441,7 +447,7 @@ elif tipo_ic == "Diferencia de Medias — Vars CONOCIDAS":
             unsafe_allow_html=True,
         )
 
-        #st.write(f"**Diferencia puntual (x̄₁ - x̄₂):** {dif_medias:.4f}")
+        st.markdown("<h3 style='font-size: 18px;'>Componentes Clave</h3>",unsafe_allow_html=True,)
         st.write(f"**Valor crítico Z:** {Z:.4f}")
         st.write(f"**Error estándar:** {ee:.4f}")
         st.write(f"**Margen de error:** ± {me:.4f}")
@@ -550,6 +556,7 @@ elif (tipo_ic== "Diferencia de Medias — Vars DESCONOCIDAS (Iguales)"):
             unsafe_allow_html=True,
         )
 
+        st.markdown("<h3 style='font-size: 18px;'>Componentes Clave</h3>",unsafe_allow_html=True,)
         st.write(f"**Valor crítico t ({df} g.l.):** {t:.4f}")
         st.write(f"**Error estándar:** {ee:.4f}")
         st.write(f"**Margen de error:** ± {me:.4f}")
@@ -648,6 +655,7 @@ elif tipo_ic == "Diferencia de Proporciones":
             unsafe_allow_html=True,
         )
 
+        st.markdown("<h3 style='font-size: 18px;'>Componentes Clave</h3>",unsafe_allow_html=True,)
         st.write(f"**Valor crítico Z:** {Z:.4f}")
         st.write(f"**Error estándar:** {ee:.4f}")
         st.write(f"**Margen de error:** ± {me:.4f}")
