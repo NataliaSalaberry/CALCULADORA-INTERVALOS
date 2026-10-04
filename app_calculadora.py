@@ -111,7 +111,7 @@ st.write("Selecciona el tipo de intervalo que deseas calcular y el nivel de conf
 # Barra lateral para selección del tipo de IC
 tipo_ic = st.sidebar.selectbox(
     "Tipo de Intervalo de Confianza:",
-    [
+    [   "",
         "Media — Varianza poblacional CONOCIDA",
         "Media — Varianza poblacional DESCONOCIDA",
         "Varianza",
