@@ -179,7 +179,7 @@ elif tipo_ic == "Media — Varianza poblacional DESCONOCIDA":
         st.write(f"**Margen de error:** ± {me:.4f}")
 
         fig1, ax1 = plt.subplots(figsize=(6, 1.02))
-        ax1.hlines(y=1, xmin=inf, xmax=sup, colors='crimson', linewidth=4, label=f'IC {confianza*100:.4f}%')
+        ax1.hlines(y=1, xmin=inf, xmax=sup, colors='crimson', linewidth=4, label=f'IC {confianza*100:.2f}%')
         ax1.plot([inf, inf], [0.85, 1.15], color='crimson', lw=2.5)
         ax1.plot([sup, sup], [0.85, 1.15], color='crimson', lw=2.5)
         #ax1.plot(x_barra, 1, 'o', color='navy', markersize=10, label=f'Media x̄ = {x_barra}')
@@ -233,7 +233,7 @@ elif tipo_ic == "Varianza":
         st.markdown(f'<div class="result-box"><b>Intervalo calculado:</b><br>IC [{var_inf:.4f} ≤ σ² ≤ {var_sup:.4f}] = {confianza*100:.2f}%</div>', unsafe_allow_html=True)
 
         fig1, ax1 = plt.subplots(figsize=(6, 1.02))
-        ax1.hlines(y=1, xmin=var_inf, xmax=var_sup, colors='crimson', linewidth=4, label=f'IC {confianza*100:.4f}%')
+        ax1.hlines(y=1, xmin=var_inf, xmax=var_sup, colors='crimson', linewidth=4, label=f'IC {confianza*100:.2f}%')
         ax1.plot([var_inf, var_inf], [0.85, 1.15], color='crimson', lw=2.5)
         ax1.plot([var_sup, var_sup], [0.85, 1.15], color='crimson', lw=2.5)
         #ax1.plot(s2, 1, 'o', color='navy', markersize=10, label=f'Varianza s² = {s2}')
