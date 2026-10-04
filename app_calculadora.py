@@ -172,7 +172,7 @@ if tipo_ic == "Media — Varianza poblacional CONOCIDA":
         
         st.markdown(f'<div class="result-box"><b>Intervalo calculado:</b><br>IC [{inf:.4f} ≤ μ ≤ {sup:.4f}] = {confianza*100:.2f}%</div>', unsafe_allow_html=True)
 
-        st.subheader("Componentes Clave")
+        st.markdown("<h3 style='font-size: 18px;'>Componentes Clave</h3>",unsafe_allow_html=True,)
         st.write(f"**Valor crítico Z:** {Z:.4f}")
         st.write(f"**Error estándar:** {ee:.4f}")
         st.write(f"**Margen de error:** ± {me:.4f}")
