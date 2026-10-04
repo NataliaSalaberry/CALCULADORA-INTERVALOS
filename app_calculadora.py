@@ -157,7 +157,7 @@ else:
 st.markdown("""
 <style>
 .result-box {
-    background-color: #FFE5D9;
+    background-color: #FF9800;
     padding: 15px;
     border-radius: 10px;
     border-left: 5px solid crimson;
