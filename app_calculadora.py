@@ -560,7 +560,6 @@ elif (tipo_ic== "Diferencia de Medias — Vars DESCONOCIDAS (Iguales)"):
             r" = 1-\alpha"
         )
         st.latex( r"\small X_1 \sim N(\mu ; \sigma) \quad | \quad X_2 \sim N(\mu ; \sigma)")
-
         st.latex( r" \small S_p^2 = {(n_1 - 1)S_1^2 + (n_2 - 1)S_2^2 \over n_1 + n_2 - 2}"
             r" \quad | \quad T_{obs} = {(\bar{X}_1 - \bar{X}_2) - (\mu_1 - \mu_2)"
             r" \over S_p \sqrt{{1 \over n_1} + {1 \over n_2}}} \sim t_{n_1+n_2-2}"
@@ -660,11 +659,6 @@ elif tipo_ic == "Diferencia de Proporciones":
             r" n_1} + {\hat{p}_2(1-\hat{p}_2) \over n_2}} \right] = 1-\alpha"
         )
         st.latex( r"\small X_1 \sim Bi(n_1 ; p_1) \quad | \quad X_2 \sim Bi(n_2 ; p_2)")
-        st.latex(
-            r"\small \hat{p}_1 \sim N\left( \bar p_1 ; \sqrt{p_1(1-p_1) \over n_1}\right)"
-            r" \quad | \quad \hat{p}_2 \sim N\left( \bar p_2 ; \sqrt{p_2(1-p_2) \over"
-            r" n_2}\right)"
-        )
         st.latex(
             r"\small Z_{obs} = {(\hat{p}_1 - \hat{p}_2) - (p_1 - p_2) \over"
             r" \sqrt{{\hat{p}_1(1-\hat{p}_1) \over n_1} + {\hat{p}_2(1-\hat{p}_2)"
