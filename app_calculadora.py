@@ -123,9 +123,10 @@ if tipo_ic == "Media — Varianza poblacional CONOCIDA":
         ax1.text(sup, 1.25, f'Lim Sup: {sup:.4f}', horizontalalignment='center', fontweight='bold', color='crimson')
         ax1.set_ylim(0.4, 1.6)
         ax1.set_yticks([])
-        ax1.set_xlabel('Escala de la Media (μ)')
-        ax1.set_title(f'Gráfico del Intervalo de Confianza')
-        ax1.legend(loc='lower right')
+        ax1.tick_params(axis='both', labelsize=7)
+        ax1.set_xlabel('Escala de la Media (μ)', fontsize=7)
+        ax1.set_title(f'Gráfico del Intervalo de Confianza', fontsize=9)
+        ax1.legend(loc='lower right', fontsize=7)
         rango = sup - inf if (sup - inf) > 0 else 1.0
         ax1.set_xlim(inf - rango*0.2, sup + rango*0.2)
         ax1.grid(True, axis='x', alpha=0.3)
