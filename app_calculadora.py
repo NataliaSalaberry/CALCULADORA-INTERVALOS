@@ -103,9 +103,10 @@ def ic_dif_proporciones(p1_hat, p2_hat, n1, n2, confianza):
 # ──────────────────────────────────────────────
 # INTERFAZ DE USUARIO (STREAMLIT)
 # ──────────────────────────────────────────────
-
-st.image("cropped-logo_FCE.png", width=500)
-st.title("Calculadora de Intervalos de Confianza")
+col1, col2, col3 = st.columns([1, 2, 1])
+with col2:
+    st.image("cropped-logo_FCE.png", width=500)
+#st.image("cropped-logo_FCE.png", width=500)
 st.markdown(
     "<h1 style='text-align: center;'>Calculadora de Intervalos de"
     " Confianza</h1>",
