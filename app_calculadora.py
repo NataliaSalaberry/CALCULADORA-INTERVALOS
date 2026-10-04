@@ -137,8 +137,11 @@ else:
     confianza = float(confianza_sel.replace("%", "")) / 100.0
 
 
-
-st.sidebar.image("https://github.com/NataliaSalaberry/INTRODUCCION-A-PYTHON-PARA-LA-RESOLUCION-DE-PROBLEMAS/blob/db600f40bebd06eb8280b7022b4d3cc49cb1fed6/cropped-logo_FCE.png", use_container_width=True)
+st.sidebar.image(
+    "https://raw.githubusercontent.com/NataliaSalaberry/INTRODUCCION-A-PYTHON-PARA-LA-RESOLUCION-DE-PROBLEMAS/db600f40bebd06eb8280b7022b4d3cc49cb1fed6/cropped-logo_FCE.png.png",
+    use_container_width=True,
+)
+#st.sidebar.image("https://github.com/NataliaSalaberry/INTRODUCCION-A-PYTHON-PARA-LA-RESOLUCION-DE-PROBLEMAS/blob/db600f40bebd06eb8280b7022b4d3cc49cb1fed6/cropped-logo_FCE.png", use_container_width=True)
 
 # Estilo CSS para mejorar presentación de fórmulas y resultados
 st.markdown("""
