@@ -653,7 +653,7 @@ elif tipo_ic == "Diferencia de Proporciones":
         # Fórmulas en LaTeX
         st.subheader("Modelos Teóricos y Fórmulas")
         st.latex(
-            r"IC \left[ (\hat{p}_1 - \hat{p}_2) - Z_{1-{\alpha \over 2}} \cdot"
+            r"\small IC \left[ (\hat{p}_1 - \hat{p}_2) - Z_{1-{\alpha \over 2}} \cdot"
             r" \sqrt{{\hat{p}_1(1-\hat{p}_1) \over n_1} + {\hat{p}_2(1-\hat{p}_2)"
             r" \over n_2}} \leq p_1 - p_2 \leq (\hat{p}_1 - \hat{p}_2) +"
             r" Z_{1-{\alpha \over 2}} \cdot \sqrt{{\hat{p}_1(1-\hat{p}_1) \over"
