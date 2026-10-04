@@ -119,7 +119,7 @@ st.markdown(
     """
     <style>
     [data-testid="stSidebar"] {
-        background-color: #FFE5D9; /* Naranja pastel */
+        background-color: #FF6A00; /* Naranja económicas */
     }
     </style>
     """,
