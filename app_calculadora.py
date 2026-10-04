@@ -104,6 +104,7 @@ def ic_dif_proporciones(p1_hat, p2_hat, n1, n2, confianza):
 # INTERFAZ DE USUARIO (STREAMLIT)
 # ──────────────────────────────────────────────
 
+st.image("cropped-logo_FCE.png", width=250)
 st.title("📊 Calculadora de Intervalos de Confianza")
 st.write("Elaborado por la Profesora Dra. Natalia Salaberry")
 st.write("Seleccione el tipo de intervalo que desea calcular y el nivel de confianza en el menu lateral e ingrese a continuación los datos correspondientes.")
@@ -135,9 +136,6 @@ if confianza_sel == "Otro":
 )
 else:
     confianza = float(confianza_sel.replace("%", "")) / 100.0
-
-
-st.sidebar.image("cropped-logo_FCE.png", use_container_width=True)
 
 # Estilo CSS para mejorar presentación de fórmulas y resultados
 st.markdown("""
