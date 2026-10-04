@@ -114,7 +114,7 @@ if tipo_ic == "Media — Varianza poblacional CONOCIDA":
 
         #with fig_col1:
         # Gráfico de Intervalo
-        fig1, ax1 = plt.subplots(figsize=(4, 1.5))
+        fig1, ax1 = plt.subplots(figsize=(6, 1))
         ax1.hlines(y=1, xmin=inf, xmax=sup, colors='crimson', linewidth=4, label=f'IC {confianza*100:.4f}%')
         ax1.plot([inf, inf], [0.85, 1.15], color='crimson', lw=2.5)
         ax1.plot([sup, sup], [0.85, 1.15], color='crimson', lw=2.5)
