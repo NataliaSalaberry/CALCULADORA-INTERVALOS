@@ -557,6 +557,7 @@ elif (tipo_ic== "Diferencia de Medias — Vars DESCONOCIDAS (Iguales)"):
         )
 
         st.markdown("<h3 style='font-size: 18px;'>Componentes Clave</h3>",unsafe_allow_html=True,)
+        st.write(f"**Grados de libertad:** {df:.0f}")
         st.write(f"**Valor crítico t ({df} g.l.):** {t:.4f}")
         st.write(f"**Error estándar:** {ee:.4f}")
         st.write(f"**Margen de error:** ± {me:.4f}")
