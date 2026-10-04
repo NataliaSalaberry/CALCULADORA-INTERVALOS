@@ -313,7 +313,7 @@ elif tipo_ic == "Proporción":
             ax2.fill_between(x_fill, stats.norm.pdf(x_fill, 0, 1), color='orange', alpha=0.4, label='Confianza')
             ax2.axvline(-z, color='coral', linestyle='--', linewidth=1.5, label=f'-Z = {-z:.4f}')
             ax2.axvline(z, color='coral', linestyle='--', linewidth=1.5, label=f'Z = {z:.4f}')
-            ax2.set_title("Región de Aceptación / Confianza (Z)")
+            ax2.set_title("Región de Confianza (Z)")
             ax2.legend()
             ax2.grid(True, alpha=0.3)
             st.pyplot(fig2)
