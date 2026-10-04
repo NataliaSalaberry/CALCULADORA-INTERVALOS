@@ -114,7 +114,7 @@ if tipo_ic == "Media — Varianza poblacional CONOCIDA":
 
         #with fig_col1:
         # Gráfico de Intervalo
-        fig1, ax1 = plt.subplots(figsize=(8, 3.5))
+        fig1, ax1 = plt.subplots(figsize=(4, 1.5))
         ax1.hlines(y=1, xmin=inf, xmax=sup, colors='crimson', linewidth=4, label=f'IC {confianza*100:.4f}%')
         ax1.plot([inf, inf], [0.85, 1.15], color='crimson', lw=2.5)
         ax1.plot([sup, sup], [0.85, 1.15], color='crimson', lw=2.5)
@@ -138,23 +138,22 @@ if tipo_ic == "Media — Varianza poblacional CONOCIDA":
         st.latex(r"X \sim N(\mu ; \sigma) \quad | \quad \bar{X} \sim N\left(\mu ; {\sigma \over {\sqrt n}}\right) \quad | \quad Z_{obs} = {\bar{X} - \mu \over {\sigma \over {\sqrt n}}} \sim N(0;1)")
         
         # Gráficos
-        fig_col2 = st.columns(1)
+        #fig_col2 = st.columns(1)
         
-        
-        with fig_col2:
-            # Gráfico Densidad Normal
-            fig2, ax2 = plt.subplots(figsize=(8, 3.5))
-            x_vals = np.linspace(-4, 4, 500)
-            y_vals = stats.norm.pdf(x_vals, 0, 1)
-            ax2.plot(x_vals, y_vals, label='N(0,1)', color='darkorange', lw=2)
-            x_fill = np.linspace(-Z, Z, 200)
-            ax2.fill_between(x_fill, stats.norm.pdf(x_fill, 0, 1), color='orange', alpha=0.4, label='Confianza')
-            ax2.axvline(-Z, color='coral', linestyle='--', linewidth=1.5, label=f'-Z = {-Z:.4f}')
-            ax2.axvline(Z, color='coral', linestyle='--', linewidth=1.5, label=f'Z = {Z:.4f}')
-            ax2.set_title("Región de Confianza")
-            ax2.legend()
-            ax2.grid(True, alpha=0.3)
-            st.pyplot(fig2)
+        #with fig_col2:
+        # Gráfico Densidad Normal
+        fig2, ax2 = plt.subplots(figsize=(8, 3.5))
+        x_vals = np.linspace(-4, 4, 500)
+        y_vals = stats.norm.pdf(x_vals, 0, 1)
+        ax2.plot(x_vals, y_vals, label='N(0,1)', color='darkorange', lw=2)
+        x_fill = np.linspace(-Z, Z, 200)
+        ax2.fill_between(x_fill, stats.norm.pdf(x_fill, 0, 1), color='orange', alpha=0.4, label='Confianza')
+        ax2.axvline(-Z, color='coral', linestyle='--', linewidth=1.5, label=f'-Z = {-Z:.4f}')
+        ax2.axvline(Z, color='coral', linestyle='--', linewidth=1.5, label=f'Z = {Z:.4f}')
+        ax2.set_title("Región de Confianza")
+        ax2.legend()
+        ax2.grid(True, alpha=0.3)
+        st.pyplot(fig2)
 
 # 2. MEDIA VARIANZA DESCONOCIDA
 elif tipo_ic == "Media — Varianza poblacional DESCONOCIDA":
