@@ -146,7 +146,7 @@ else:
 st.markdown("""
 <style>
 .result-box {
-    background-color: #ffe0b2;
+    background-color: #FFE0B2;
     padding: 15px;
     border-radius: 10px;
     border-left: 5px solid crimson;
