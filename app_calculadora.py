@@ -106,7 +106,6 @@ def ic_dif_proporciones(p1_hat, p2_hat, n1, n2, confianza):
 col1, col2, col3 = st.columns([1, 2, 1])
 with col2:
     st.image("cropped-logo_FCE.png", width=500)
-#st.image("cropped-logo_FCE.png", width=500)
 st.markdown(
     "<h1 style='text-align: center;'>Calculadora de Intervalos de"
     " Confianza</h1>",
@@ -115,7 +114,7 @@ st.markdown(
 st.write("Elaborado por la Profesora Dra. Natalia Salaberry")
 st.write("Seleccione el tipo de intervalo que desea calcular y el nivel de confianza en el menu lateral e ingrese a continuación los datos correspondientes.")
 
-# Barra lateral para selección del tipo de IC
+# Lateral para selección del tipo de IC
 tipo_ic = st.sidebar.selectbox(
     "Tipo de Intervalo de Confianza:",
     [   "Seleccione un intervalo",
@@ -129,7 +128,7 @@ tipo_ic = st.sidebar.selectbox(
     ]
 )
 
-# Confianza común para todos
+# Nivel de Confianza 
 confianza_sel = st.sidebar.selectbox("Nivel de confianza:", ["0%","90%", "95%", "99%", "Otro"])
 if confianza_sel == "Otro":
     confianza = st.sidebar.number_input(
@@ -143,8 +142,6 @@ if confianza_sel == "Otro":
 else:
     confianza = float(confianza_sel.replace("%", "")) / 100.0
 
-st.sidebar.image("esquema.png", use_container_width=True)
-
 # Estilo CSS para mejorar presentación de fórmulas y resultados
 st.markdown("""
 <style>
@@ -157,6 +154,8 @@ st.markdown("""
 }
 </style>
 """, unsafe_allow_html=True)
+
+st.sidebar.image("esquema.png", use_container_width=True)
 
 # 1. MEDIA VARIANZA CONOCIDA
 if tipo_ic == "Media — Varianza poblacional CONOCIDA":
