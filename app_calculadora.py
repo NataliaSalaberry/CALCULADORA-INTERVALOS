@@ -64,7 +64,7 @@ def ic_dif_medias_varianzas_conocidas(x_barra1, x_barra2, sigma1, sigma2, n1, n2
 # ──────────────────────────────────────────────
 
 st.title("📊 Calculadora de Intervalos de Confianza")
-st.write("Selecciona el tipo de intervalo que deseas calcular en la barra lateral e ingresa los datos correspondientes.")
+st.write("Selecciona el tipo de intervalo que deseas calcular en el menu lateral e ingresa a continuación los datos correspondientes.")
 
 # Barra lateral para selección del tipo de IC
 tipo_ic = st.sidebar.selectbox(
@@ -390,7 +390,7 @@ elif tipo_ic == "Diferencia de Medias — Varianzas poblacionales CONOCIDAS":
             unsafe_allow_html=True,
         )
 
-        st.write(f"**Diferencia puntual (x̄₁ - x̄₂):** {dif_medias:.4f}")
+        #st.write(f"**Diferencia puntual (x̄₁ - x̄₂):** {dif_medias:.4f}")
         st.write(f"**Valor crítico Z:** {Z:.4f}")
         st.write(f"**Error estándar:** {ee:.4f}")
         st.write(f"**Margen de error:** ± {me:.4f}")
@@ -401,15 +401,7 @@ elif tipo_ic == "Diferencia de Medias — Varianzas poblacionales CONOCIDAS":
         ax1.plot([inf, inf], [0.85, 1.15], color="crimson", lw=2.5)
         ax1.plot([sup, sup], [0.85, 1.15], color="crimson", lw=2.5)
 
-        ax1.text(
-            inf,
-            1.25,
-            f"Lim Inf: {inf:.4f}",
-            horizontalalignment="center",
-            fontweight="bold",
-            color="crimson",
-            fontsize=8,
-        )
+        ax1.text(inf,1.25,f"Lim Inf: {inf:.4f}",horizontalalignment="center",fontweight="bold",color="crimson",fontsize=8,)
         ax1.text(sup,1.25,f"Lim Sup: {sup:.4f}",horizontalalignment="center",fontweight="bold",color="crimson",fontsize=8,)
         ax1.set_ylim(0.4, 1.6)
         ax1.set_yticks([])
