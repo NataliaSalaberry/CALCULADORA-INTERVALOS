@@ -190,7 +190,7 @@ elif tipo_ic == "Media — Varianza poblacional DESCONOCIDA":
         ax1.tick_params(axis='both', labelsize=7)
         ax1.set_xlabel('Escala de la Media (μ)', fontsize=7)
         ax1.set_title('Gráfico del Intervalo de Confianza', fontsize=9)
-        ax1.legend(loc='lower right')
+        ax1.legend(loc='lower right', fontsize=7)
         rango = sup - inf if (sup - inf) > 0 else 1.0
         ax1.set_xlim(inf - rango*0.2, sup + rango*0.2)
         ax1.grid(True, axis='x', alpha=0.3)
@@ -244,7 +244,7 @@ elif tipo_ic == "Varianza":
         ax1.tick_params(axis='both', labelsize=7)
         ax1.set_xlabel('Escala de la Varianza (σ²)', fontsize=7)
         ax1.set_title('Gráfico del Intervalo de Confianza', fontsize=9)
-        ax1.legend(loc='lower right')
+        ax1.legend(loc='lower right', fontsize=7)
         rango = var_sup - var_inf
         ax1.set_xlim(var_inf - rango*0.2, var_sup + rango*0.2)
         ax1.grid(True, axis='x', alpha=0.3)
@@ -302,7 +302,7 @@ elif tipo_ic == "Proporción":
         ax1.tick_params(axis='both', labelsize=7)
         ax1.set_xlabel('Escala de la Proporción (p)', fontsize=7)
         ax1.set_title('Gráfico del Intervalo de Confianza', fontsize=9)
-        ax1.legend(loc='lower right')
+        ax1.legend(loc='lower right', fontsize=7)
         rango = sup - inf if (sup - inf) > 0 else 1.0
         ax1.set_xlim(inf - rango*0.2, sup + rango*0.2)
         ax1.grid(True, axis='x', alpha=0.3)
