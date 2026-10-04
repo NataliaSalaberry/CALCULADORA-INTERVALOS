@@ -109,22 +109,16 @@ if tipo_ic == "Media — Varianza poblacional CONOCIDA":
         st.write(f"**Valor crítico Z:** {Z:.4f}")
         st.write(f"**Error estándar:** {ee:.4f}")
         st.write(f"**Margen de error:** ± {me:.4f}")
-        
-        # Fórmulas en LaTeX
-        st.subheader("Modelos Teóricos y Fórmulas")
-        st.latex(r"IC \left[ \bar{X} - Z_{1-{\alpha \over 2}} * {\sigma \over {\sqrt n}} \leq \mu \leq  \bar{X} + Z_{1-{\alpha \over 2}} * {\sigma \over {\sqrt n}} \right]=1-\alpha")
-        st.latex(r"X \sim N(\mu ; \sigma) \quad | \quad \bar{X} \sim N\left(\mu ; {\sigma \over {\sqrt n}}\right) \quad | \quad Z_{obs} = {\bar{X} - \mu \over {\sigma \over {\sqrt n}}} \sim N(0;1)")
-        
-        # Gráficos
-        fig_col1, fig_col2 = st.columns(2)
-        
+
+        fig_col1 = st.columns(1)
+
         with fig_col1:
             # Gráfico de Intervalo
             fig1, ax1 = plt.subplots(figsize=(8, 3.5))
             ax1.hlines(y=1, xmin=inf, xmax=sup, colors='crimson', linewidth=4, label=f'IC {confianza*100:.4f}%')
             ax1.plot([inf, inf], [0.85, 1.15], color='crimson', lw=2.5)
             ax1.plot([sup, sup], [0.85, 1.15], color='crimson', lw=2.5)
-            ax1.plot(x_barra, 1, 'o', color='navy', markersize=10, label=f'Media x̄ = {x_barra}')
+            #ax1.plot(x_barra, 1, 'o', color='navy', markersize=10, label=f'Media x̄ = {x_barra}')
             ax1.text(inf, 1.25, f'Lim Inf: {inf:.4f}', horizontalalignment='center', fontweight='bold', color='crimson')
             ax1.text(sup, 1.25, f'Lim Sup: {sup:.4f}', horizontalalignment='center', fontweight='bold', color='crimson')
             ax1.set_ylim(0.4, 1.6)
@@ -136,7 +130,17 @@ if tipo_ic == "Media — Varianza poblacional CONOCIDA":
             ax1.set_xlim(inf - rango*0.2, sup + rango*0.2)
             ax1.grid(True, axis='x', alpha=0.3)
             st.pyplot(fig1)
-            
+
+        
+        # Fórmulas en LaTeX
+        st.subheader("Modelos Teóricos y Fórmulas")
+        st.latex(r"IC \left[ \bar{X} - Z_{1-{\alpha \over 2}} * {\sigma \over {\sqrt n}} \leq \mu \leq  \bar{X} + Z_{1-{\alpha \over 2}} * {\sigma \over {\sqrt n}} \right]=1-\alpha")
+        st.latex(r"X \sim N(\mu ; \sigma) \quad | \quad \bar{X} \sim N\left(\mu ; {\sigma \over {\sqrt n}}\right) \quad | \quad Z_{obs} = {\bar{X} - \mu \over {\sigma \over {\sqrt n}}} \sim N(0;1)")
+        
+        # Gráficos
+        fig_col2 = st.columns(1)
+        
+        
         with fig_col2:
             # Gráfico Densidad Normal
             fig2, ax2 = plt.subplots(figsize=(8, 3.5))
