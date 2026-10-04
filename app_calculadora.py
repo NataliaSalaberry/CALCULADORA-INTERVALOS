@@ -138,7 +138,7 @@ else:
 
 
 
-st.sidebar.image("https://github.com/NataliaSalaberry/INTRODUCCION-A-PYTHON-PARA-LA-RESOLUCION-DE-PROBLEMAS/blob/db600f40bebd06eb8280b7022b4d3cc49cb1fed6/cropped-logo_FCE.png", use_container_width=True)
+st.sidebar.image("cropped-logo_FCE.png", use_container_width=True)
 
 # Estilo CSS para mejorar presentación de fórmulas y resultados
 st.markdown("""
