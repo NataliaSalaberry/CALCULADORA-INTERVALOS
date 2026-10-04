@@ -66,7 +66,7 @@ tipo_ic = st.sidebar.selectbox(
 # Confianza común para todos
 confianza_sel = st.sidebar.selectbox("Nivel de confianza:", ["90%", "95%", "99%", "Otro"])
 if confianza_sel == "Otro":
-    confianza = st.sidebar.slider("Valor de confianza personalizado:", min_value=0.01, max_value=0.99, value=0.955, step=0.001)
+    confianza = st.sidebar.slider("Valor de confianza personalizado:", min_value=0.01, max_value=0.99, value=0.955, step=0.001, format="%.3f")
 else:
     confianza = float(confianza_sel.replace("%", "")) / 100.0
 
