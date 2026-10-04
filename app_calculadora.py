@@ -77,7 +77,7 @@ def ic_dif_medias_varianzas_desconocidas_iguales(x_barra1, x_barra2, s1, s2, n1,
     inf, sup = dif_medias - me, dif_medias + me
     return (inf, sup), t, ee, me, dif_medias, df
 
-ef ic_cociente_varianzas(s1, s2, n1, n2, confianza):
+def ic_cociente_varianzas(s1, s2, n1, n2, confianza):
     alpha = 1 - confianza
     df1 = n1 - 1
     df2 = n2 - 1
