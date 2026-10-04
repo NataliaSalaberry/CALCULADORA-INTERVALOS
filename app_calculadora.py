@@ -104,7 +104,7 @@ def ic_dif_proporciones(p1_hat, p2_hat, n1, n2, confianza):
 # INTERFAZ DE USUARIO (STREAMLIT)
 # ──────────────────────────────────────────────
 
-st.image("uba econ blanco xl..png", width=500)
+st.image("cropped-logo_FCE.png", width=500)
 st.title("📊 Calculadora de Intervalos de Confianza")
 st.write("Elaborado por la Profesora Dra. Natalia Salaberry")
 st.write("Seleccione el tipo de intervalo que desea calcular y el nivel de confianza en el menu lateral e ingrese a continuación los datos correspondientes.")
