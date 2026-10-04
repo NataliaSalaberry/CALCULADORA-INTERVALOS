@@ -105,7 +105,7 @@ def ic_dif_proporciones(p1_hat, p2_hat, n1, n2, confianza):
 # ──────────────────────────────────────────────
 
 st.title("📊 Calculadora de Intervalos de Confianza")
-st.write("Selecciona el tipo de intervalo que deseas calcular en el menu lateral e ingresa a continuación los datos correspondientes.")
+st.write("Selecciona el tipo de intervalo que deseas calcular y el nivel de confianza en el menu lateral e ingresa a continuación los datos correspondientes.")
 
 # Barra lateral para selección del tipo de IC
 tipo_ic = st.sidebar.selectbox(
