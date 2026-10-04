@@ -361,7 +361,7 @@ elif tipo_ic == "Proporción":
         
         st.subheader("Modelos Teóricos y Fórmulas")
         st.latex(r"IC \left[ \hat{p} - Z_{1-{\alpha \over 2}} * \sqrt{\frac{\hat{p}(1-\hat{p})}{n}} \leq p \leq \hat{p} + Z_{1-{\alpha \over 2}} *\sqrt{\frac{\hat{p}(1-\hat{p})}{n}} \right]=1-\alpha")
-        st.latex(r"X \sim Bi(n ; p) \quad | \quad \hat p \sim N(\mu ; \sigma) \quad | \quad Z_{obs}={\hat p - p \over {\sqrt {p(1-p) \over n}}} \sim N(0;1)")
+        st.latex(r"X \sim Bi(n ; p) \quad | \quad \hat p \sim N(\bar p ; {\sqrt {p(1-p) \over n}}) \quad | \quad Z_{obs}={\hat p - p \over {\sqrt {p(1-p) \over n}}} \sim N(0;1)")
         
         #fig_col1, fig_col2 = st.columns(2)
         #with fig_col1: 
@@ -661,8 +661,8 @@ elif tipo_ic == "Diferencia de Proporciones":
         )
         st.latex( r"\small X_1 \sim Bi(n_1 ; p_1) \quad | \quad X_2 \sim Bi(n_2 ; p_2)")
         st.latex(
-            r"\small \hat{p}_1 \sim N\left(p_1 ; \sqrt{p_1(1-p_1) \over n_1}\right)"
-            r" \quad | \quad \hat{p}_2 \sim N\left(p_2 ; \sqrt{p_2(1-p_2) \over"
+            r"\small \hat{p}_1 \sim N\left( \bar p_1 ; \sqrt{p_1(1-p_1) \over n_1}\right)"
+            r" \quad | \quad \hat{p}_2 \sim N\left( \bar p_2 ; \sqrt{p_2(1-p_2) \over"
             r" n_2}\right)"
         )
         st.latex(
