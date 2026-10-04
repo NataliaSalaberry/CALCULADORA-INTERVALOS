@@ -59,6 +59,24 @@ def ic_dif_medias_varianzas_conocidas(x_barra1, x_barra2, sigma1, sigma2, n1, n2
     inf, sup = dif_medias - me, dif_medias + me
     return (inf, sup), z, ee, me, dif_medias
 
+def ic_dif_medias_varianzas_desconocidas_iguales(x_barra1, x_barra2, s1, s2, n1, n2, confianza):
+    alpha = 1 - confianza
+    df = n1 + n2 - 2
+    t = stats.t.ppf(1 - alpha / 2, df=df)
+
+    # (Sp^2)
+    sp2 = (((n1 - 1) * (s1**2)) + ((n2 - 1) * (s2**2))) / df
+
+    # Error estándar 
+    ee = np.sqrt(sp2 * ((1 / n1) + (1 / n2)))
+
+    # Margen de error y estimación puntual
+    me = t * ee
+    dif_medias = x_barra1 - x_barra2
+
+    inf, sup = dif_medias - me, dif_medias + me
+    return (inf, sup), t, ee, me, dif_medias, df
+
 # ──────────────────────────────────────────────
 # INTERFAZ DE USUARIO (STREAMLIT)
 # ──────────────────────────────────────────────
@@ -74,7 +92,8 @@ tipo_ic = st.sidebar.selectbox(
         "Media — Varianza poblacional DESCONOCIDA",
         "Varianza",
         "Proporción",
-        "Diferencia de Medias — Varianzas poblacionales CONOCIDAS"
+        "Diferencia de Medias — Varianzas poblacionales CONOCIDAS",
+        "Diferencia de Medias — Varianzas poblacionales DESCONOCIDAS (Iguales)"
     ]
 )
 
@@ -433,6 +452,112 @@ elif tipo_ic == "Diferencia de Medias — Varianzas poblacionales CONOCIDAS":
         ax2.axvline(Z, color="coral", linestyle="--", linewidth=1.5, label=f"Z = {Z:.4f}")
         ax2.set_ylim(0, max(y_vals) + 0.05)
         ax2.set_title("Región de Confianza")
+        ax2.legend()
+        ax2.grid(True, alpha=0.3)
+        st.pyplot(fig2)
+
+# DIF MEDIAS CON VAR DESCONOCIDAS (IGUALES)
+elif (tipo_ic== "Diferencia de Medias — Varianzas poblacionales DESCONOCIDAS (Iguales)"):
+    st.header(
+        "IC para la Diferencia de Medias (μ₁ - μ₂) — Varianzas Poblacionales"
+        " Desconocidas pero Iguales"
+    )
+
+    col1, col2 = st.columns(2)
+    with col1:
+        st.subheader("Muestra 1")
+        x_barra1 = st.number_input("Media muestral (x̄₁):", value=0.0, key="x1")
+        s1 = st.number_input(
+            "Desviación estándar muestral (S₁):",
+            value=1.0,
+            min_value=0.0001,
+            key="s1",
+        )
+        n1 = st.number_input(
+            "Tamaño de muestra (n₁):", value=30, min_value=2, key="n1"
+        )
+
+    with col2:
+        st.subheader("Muestra 2")
+        x_barra2 = st.number_input("Media muestral (x̄₂):", value=0.0, key="x2")
+        s2 = st.number_input(
+            "Desviación estándar muestral (S₂):",
+            value=1.0,
+            min_value=0.0001,
+            key="s2",
+        )
+        n2 = st.number_input(
+            "Tamaño de muestra (n₂):", value=30, min_value=2, key="n2"
+        )
+
+    if st.button("Calcular Intervalo"):
+        (
+            intervalo,
+            t,
+            ee,
+            me,
+            dif_medias,
+            df,
+        ) = ic_dif_medias_varianzas_desconocidas_iguales(
+            x_barra1, x_barra2, s1, s2, n1, n2, confianza
+        )
+        inf, sup = intervalo
+
+        st.markdown(
+            f'<div class="result-box"><b>Intervalo calculado:</b><br>IC [{inf:.4f}'
+            f" ≤ μ₁ - μ₂ ≤ {sup:.4f}] = {confianza*100:.2f}%</div>",
+            unsafe_allow_html=True,
+        )
+
+        st.write(f"**Valor crítico t ({df} g.l.):** {t:.4f}")
+        st.write(f"**Error estándar:** {ee:.4f}")
+        st.write(f"**Margen de error:** ± {me:.4f}")
+
+        # Gráfico de Intervalo
+        fig1, ax1 = plt.subplots(figsize=(6, 1.02))
+        ax1.hlines(y=1,xmin=inf,xmax=sup,colors="crimson",linewidth=4,label=f"IC {confianza*100:.2f}%",)
+        ax1.plot([inf, inf], [0.85, 1.15], color="crimson", lw=2.5)
+        ax1.plot([sup, sup], [0.85, 1.15], color="crimson", lw=2.5)
+
+        ax1.text(inf,1.25,f"Lim Inf: {inf:.4f}",horizontalalignment="center",fontweight="bold",color="crimson",fontsize=8,)
+        ax1.text(sup,1.25,f"Lim Sup: {sup:.4f}",horizontalalignment="center",fontweight="bold",color="crimson",fontsize=8,)
+        ax1.set_ylim(0.4, 1.6)
+        ax1.set_yticks([])
+        ax1.tick_params(axis="both", labelsize=7)
+        ax1.set_xlabel("Escala de la Diferencia de Medias (μ₁ - μ₂)", fontsize=7)
+        ax1.set_title("Gráfico del Intervalo de Confianza", fontsize=9)
+        ax1.legend(loc="lower right", fontsize=7)
+        rango = sup - inf if (sup - inf) > 0 else 1.0
+        ax1.set_xlim(inf - rango * 0.2, sup + rango * 0.2)
+        ax1.grid(True, axis="x", alpha=0.3)
+        st.pyplot(fig1)
+
+        # Fórmulas en LaTeX
+        st.subheader("Modelos Teóricos y Fórmulas")
+        st.latex(
+            r"IC \left[ (\bar{X}_1 - \bar{X}_2) - t_{1-{\alpha \over 2}, n_1+n_2-2}"
+            r" \cdot S_p \sqrt{{1 \over n_1} + {1 \over n_2}} \leq \mu_1 -\mu_2"
+            r" \leq (\bar{X}_1 - \bar{X}_2) + t_{1-{\alpha \over 2},"
+            r" n_1+n_2-2} \cdot S_p \sqrt{{1 \over n_1} + {1 \over n_2}} \right]"
+            r" = 1-\alpha"
+        )
+        st.latex(
+            r"S_p^2 = {(n_1 - 1)S_1^2 + (n_2 - 1)S_2^2 \over n_1 + n_2 - 2}"
+            r" \quad | \quad T_{obs} = {(\bar{X}_1 - \bar{X}_2) - (\mu_1 - \mu_2)"
+            r" \over S_p \sqrt{{1 \over n_1} + {1 \over n_2}}} \sim t_{n_1+n_2-2}"
+        )
+
+        # Gráfico Densidad t-Student
+        fig2, ax2 = plt.subplots(figsize=(8, 3.5))
+        x_vals = np.linspace(-4, 4, 500)
+        y_vals = stats.t.pdf(x_vals, df=df)
+        ax2.plot(x_vals, y_vals, label=f"t({df} g.l.)", color="darkorange", lw=2)
+        x_fill = np.linspace(-t, t, 200)
+        ax2.fill_between(x_fill,stats.t.pdf(x_fill, df=df),color="orange",alpha=0.4,label="Confianza",)
+        ax2.axvline(-t,color="coral",linestyle="--",linewidth=1.5,label=f"-t = {-t:.4f}",)
+        ax2.axvline(t, color="coral", linestyle="--", linewidth=1.5, label=f"t = {t:.4f}")
+        ax2.set_ylim(0, max(y_vals) + 0.05)
+        ax2.set_title("Región de Confianza (Distribución t-Student)")
         ax2.legend()
         ax2.grid(True, alpha=0.3)
         st.pyplot(fig2)
