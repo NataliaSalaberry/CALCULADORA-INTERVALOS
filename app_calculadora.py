@@ -642,6 +642,8 @@ elif tipo_ic == "Diferencia de Proporciones":
         st.write(f"**Valor crítico Z:** {Z:.4f}")
         st.write(f"**Error estándar:** {ee:.4f}")
         st.write(f"**Margen de error:** ± {me:.4f}")
+        st.write(f"**Amplitud IC:** ± {amplitud:.4f}")
+        
 
         # Gráfico de Intervalo
         fig1, ax1 = plt.subplots(figsize=(6, 1.02))
