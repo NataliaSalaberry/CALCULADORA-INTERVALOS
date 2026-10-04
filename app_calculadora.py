@@ -417,13 +417,12 @@ elif tipo_ic == "Diferencia de Medias — Varianzas poblacionales CONOCIDAS":
             r" \cdot \sqrt{{\sigma_1^2 \over n_1} + {\sigma_2^2 \over n_2}}"
             r" \right] = 1-\alpha"
         )
-        st.latex(r"X_1 \sim N(\mu ; \sigma) \quad | \quad X_2 \sim N(\mu ; \sigma) \quad | \quad"
+        st.latex(r"X_1 \sim N(\mu ; \sigma) \quad | \quad X_2 \sim N(\mu ; \sigma) \quad | "
             r"Z_{obs} = {(\bar{X}_1 - \bar{X}_2) - (\mu_1 - \mu_2) \over"
             r" \sqrt{{\sigma_1^2 \over n_1} + {\sigma_2^2 \over n_2}}} \sim"
             r" N(0;1)"
         )
-        st.latex(r"X \sim N(\mu ; \sigma) \quad | \quad \bar{X} \sim N\left(\mu ; {\sigma \over {\sqrt n}}\right) \quad | \quad Z_{obs} = {\bar{X} - \mu \over {\sigma \over {\sqrt n}}} \sim N(0;1)")
-
+        
         # Gráfico Densidad Normal
         fig2, ax2 = plt.subplots(figsize=(8, 3.5))
         x_vals = np.linspace(-4, 4, 500)
