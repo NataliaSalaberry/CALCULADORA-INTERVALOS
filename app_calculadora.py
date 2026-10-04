@@ -171,7 +171,8 @@ if tipo_ic == "Media — Varianza poblacional CONOCIDA":
         inf, sup = intervalo
         
         st.markdown(f'<div class="result-box"><b>Intervalo calculado:</b><br>IC [{inf:.4f} ≤ μ ≤ {sup:.4f}] = {confianza*100:.2f}%</div>', unsafe_allow_html=True)
-        
+
+        st.subheader("Componentes Clave")
         st.write(f"**Valor crítico Z:** {Z:.4f}")
         st.write(f"**Error estándar:** {ee:.4f}")
         st.write(f"**Margen de error:** ± {me:.4f}")
@@ -201,7 +202,7 @@ if tipo_ic == "Media — Varianza poblacional CONOCIDA":
 
         
         # Fórmulas en LaTeX
-        st.subheader("Modelos Teóricos y Fórmulas")
+        st.subheader("Fórmula utilizada y Distribuciones")
         st.latex(r"IC \left[ \bar{X} - Z_{1-{\alpha \over 2}} * {\sigma \over {\sqrt n}} \leq \mu \leq  \bar{X} + Z_{1-{\alpha \over 2}} * {\sigma \over {\sqrt n}} \right]=1-\alpha")
         st.latex(r"X \sim N(\mu ; \sigma) \quad | \quad \bar{X} \sim N\left(\mu ; {\sigma \over {\sqrt n}}\right) \quad | \quad Z_{obs} = {\bar{X} - \mu \over {\sigma \over {\sqrt n}}} \sim N(0;1)")
         
@@ -264,7 +265,7 @@ elif tipo_ic == "Media — Varianza poblacional DESCONOCIDA":
         ax1.grid(True, axis='x', alpha=0.3)
         st.pyplot(fig1)
         
-        st.subheader("Modelos Teóricos y Fórmulas")
+        st.subheader("Fórmula utilizada y Distribuciones")
         st.latex(r"IC \left[ \bar{X} - t_{n-1; {1- {\alpha \over 2}}} * {s \over {\sqrt n}} \leq \mu \leq  \bar{X} + t_{n-1; {1- {\alpha \over 2}}} * {s \over {\sqrt n}} \right] =1-\alpha")
         st.latex(r"X \sim N(\mu ; \sigma) \quad | \quad \bar{X} \sim N\left(\mu ; {S \over {\sqrt n}}\right) \quad | \quad t_{obs}= {\bar{X} - \mu \over {S \over {\sqrt n}}} \sim t_{n-1}")
         
@@ -320,7 +321,7 @@ elif tipo_ic == "Varianza":
         ax1.grid(True, axis='x', alpha=0.3)
         st.pyplot(fig1)
         
-        st.subheader("Modelos Teóricos y Fórmulas")
+        st.subheader("Fórmula utilizada y Distribuciones")
         st.latex(r"IC \left[\frac{(n-1)s^2}{\chi^2_{1-{\alpha \over 2}}} \leq \sigma^2 \leq \frac{(n-1)s^2}{\chi^2_{\alpha \over 2}}\right]= 1- \alpha")
         st.latex(r"X \sim N(\mu ; \sigma) \quad | \quad S^2 \sim \chi^2_n \quad | \quad \chi^2_{obs} = {(n-1)S^2 \over \sigma^2} \sim \chi^2_{n-1}")
         
@@ -379,7 +380,7 @@ elif tipo_ic == "Proporción":
         ax1.grid(True, axis='x', alpha=0.3)
         st.pyplot(fig1)
         
-        st.subheader("Modelos Teóricos y Fórmulas")
+        st.subheader("Fórmula utilizada y Distribuciones")
         st.latex(r"IC \left[ \hat{p} - Z_{1-{\alpha \over 2}} * \sqrt{\frac{\hat{p}(1-\hat{p})}{n}} \leq p \leq \hat{p} + Z_{1-{\alpha \over 2}} *\sqrt{\frac{\hat{p}(1-\hat{p})}{n}} \right]=1-\alpha")
         st.latex(r"X \sim Bi(n ; p) \quad | \quad \hat p \sim N(\bar p ; {\sqrt {p(1-p) \over n}}) \quad | \quad Z_{obs}={\hat p - p \over {\sqrt {p(1-p) \over n}}} \sim N(0;1)")
         
@@ -466,7 +467,7 @@ elif tipo_ic == "Diferencia de Medias — Vars CONOCIDAS":
         st.pyplot(fig1)
 
         # Fórmulas en LaTeX
-        st.subheader("Modelos Teóricos y Fórmulas")
+        st.subheader("Fórmula utilizada y Distribuciones")
         st.latex(
             r"\small IC \left[ (\bar{X}_1 - \bar{X}_2) - Z_{1-{\alpha \over 2}} \cdot"
             r" \sqrt{{\sigma_1^2 \over n_1} + {\sigma_2^2 \over n_2}} \leq \mu_1"
@@ -574,7 +575,7 @@ elif (tipo_ic== "Diferencia de Medias — Vars DESCONOCIDAS (Iguales)"):
         st.pyplot(fig1)
 
         # Fórmulas en LaTeX
-        st.subheader("Modelos Teóricos y Fórmulas")
+        st.subheader("Fórmula utilizada y Distribuciones")
         st.latex(
             r"\small IC \left[ (\bar{X}_1 - \bar{X}_2) - t_{1-{\alpha \over 2}, n_1+n_2-2}"
             r" \cdot S_p \sqrt{{1 \over n_1} + {1 \over n_2}} \leq \mu_1 -\mu_2"
@@ -675,7 +676,7 @@ elif tipo_ic == "Diferencia de Proporciones":
         st.pyplot(fig1)
 
         # Fórmulas en LaTeX
-        st.subheader("Modelos Teóricos y Fórmulas")
+        st.subheader("Fórmula utilizada y Distribuciones")
         st.latex(
             r"\scriptsize IC \left[ (\hat{p}_1 - \hat{p}_2) - Z_{1-{\alpha \over 2}} \cdot"
             r" \sqrt{{\hat{p}_1(1-\hat{p}_1) \over n_1} + {\hat{p}_2(1-\hat{p}_2)"
