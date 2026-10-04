@@ -361,7 +361,7 @@ elif tipo_ic == "Proporción":
         
         st.subheader("Modelos Teóricos y Fórmulas")
         st.latex(r"IC \left[ \hat{p} - Z_{1-{\alpha \over 2}} * \sqrt{\frac{\hat{p}(1-\hat{p})}{n}} \leq p \leq \hat{p} + Z_{1-{\alpha \over 2}} *\sqrt{\frac{\hat{p}(1-\hat{p})}{n}} \right]=1-\alpha")
-        st.latex(r"X \sim Bi(n ; p) \quad | \quad \hat p \sim Bi(n ; p) \quad | \quad Z_{obs}={\hat p - p \over {\sqrt {p(1-p) \over n}}} \sim N(0;1)")
+        st.latex(r"X \sim Bi(n ; p) \quad | \quad \hat p \sim N(\mu ; \sigma) \quad | \quad Z_{obs}={\hat p - p \over {\sqrt {p(1-p) \over n}}} \sim N(0;1)")
         
         #fig_col1, fig_col2 = st.columns(2)
         #with fig_col1: 
