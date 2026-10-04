@@ -430,13 +430,13 @@ elif tipo_ic == "Diferencia de Medias — Varianzas poblacionales CONOCIDAS":
         # Fórmulas en LaTeX
         st.subheader("Modelos Teóricos y Fórmulas")
         st.latex(
-            r"IC \left[ (\bar{X}_1 - \bar{X}_2) - Z_{1-{\alpha \over 2}} \cdot"
+            r"\small IC \left[ (\bar{X}_1 - \bar{X}_2) - Z_{1-{\alpha \over 2}} \cdot"
             r" \sqrt{{\sigma_1^2 \over n_1} + {\sigma_2^2 \over n_2}} \leq \mu_1"
             r" - \mu_2 \leq (\bar{X}_1 - \bar{X}_2) + Z_{1-{\alpha \over 2}}"
             r" \cdot \sqrt{{\sigma_1^2 \over n_1} + {\sigma_2^2 \over n_2}}"
             r" \right] = 1-\alpha"
         )
-        st.latex(r"X_1 \sim N(\mu ; \sigma) \quad | \quad X_2 \sim N(\mu ; \sigma) \quad | \quad Z_{obs} = {(\bar{X}_1 - \bar{X}_2) - (\mu_1 - \mu_2) \over"
+        st.latex(r"\small X_1 \sim N(\mu ; \sigma) | X_2 \sim N(\mu ; \sigma) \quad | \quad Z_{obs} = {(\bar{X}_1 - \bar{X}_2) - (\mu_1 - \mu_2) \over"
             r" \sqrt{{\sigma_1^2 \over n_1} + {\sigma_2^2 \over n_2}}} \sim"
             r" N(0;1)"
         )
@@ -541,7 +541,7 @@ elif (tipo_ic== "Diferencia de Medias — Varianzas poblacionales DESCONOCIDAS (
             r" n_1+n_2-2} \cdot S_p \sqrt{{1 \over n_1} + {1 \over n_2}} \right]"
             r" = 1-\alpha"
         )
-        st.latex( r" \small X_1 \sim N(\mu ; \sigma) \quad | \quad X_2 \sim N(\mu ; \sigma) \quad | \quad S_p^2 = {(n_1 - 1)S_1^2 + (n_2 - 1)S_2^2 \over n_1 + n_2 - 2}"
+        st.latex( r" \small X_1 \sim N(\mu ; \sigma) | X_2 \sim N(\mu ; \sigma) \quad | \quad S_p^2 = {(n_1 - 1)S_1^2 + (n_2 - 1)S_2^2 \over n_1 + n_2 - 2}"
             r" \quad | \quad T_{obs} = {(\bar{X}_1 - \bar{X}_2) - (\mu_1 - \mu_2)"
             r" \over S_p \sqrt{{1 \over n_1} + {1 \over n_2}}} \sim t_{n_1+n_2-2}"
         )
