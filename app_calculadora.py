@@ -107,13 +107,13 @@ if tipo_ic == "Media — Varianza poblacional CONOCIDA":
         st.markdown(f'<div class="result-box"><b>Intervalo calculado:</b><br>IC [{inf:.4f} ≤ μ ≤ {sup:.4f}] = {confianza*100:.2f}%</div>', unsafe_allow_html=True)
         
         st.write(f"**Valor crítico Z:** {Z:.4f}")
-        st.write(f"**Error estándar (σ/∙n):** {ee:.4f}")
+        st.write(f"**Error estándar:** {ee:.4f}")
         st.write(f"**Margen de error:** ± {me:.4f}")
         
         # Fórmulas en LaTeX
         st.subheader("Modelos Teóricos y Fórmulas")
         st.latex(r"IC \left[ \bar{X} - Z_{1-{\alpha \over 2}} * {\sigma \over {\sqrt n}} \leq \mu \leq  \bar{X} + Z_{1-{\alpha \over 2}} * {\sigma \over {\sqrt n}} \right]=1-\alpha")
-        st.latex(r"X \sim N(\mu ; \sigma) \quad | \quad \bar{X} \sim N\left(\mu ; {\sigma \over {\sqrt n}}\right) \quad | \quad {\bar{X} - \mu \over {\sigma \over {\sqrt n}}} \sim N(0;1)")
+        st.latex(r"X \sim N(\mu ; \sigma) \quad | \quad \bar{X} \sim N\left(\mu ; {\sigma \over {\sqrt n}}\right) \quad | \quad Z = {\bar{X} - \mu \over {\sigma \over {\sqrt n}}} \sim N(0;1)")
         
         # Gráficos
         fig_col1, fig_col2 = st.columns(2)
@@ -170,12 +170,12 @@ elif tipo_ic == "Media — Varianza poblacional DESCONOCIDA":
         
         st.write(f"**Grados de libertad (n-1):** {gl}")
         st.write(f"**Valor crítico t:** {t:.4f}")
-        st.write(f"**Error estándar (s/∙n):** {ee:.4f}")
+        st.write(f"**Error estándar:** {ee:.4f}")
         st.write(f"**Margen de error:** ± {me:.4f}")
         
         st.subheader("Modelos Teóricos y Fórmulas")
         st.latex(r"IC \left[ \bar{X} - t_{n-1; {1- {\alpha \over 2}}} * {s \over {\sqrt n}} \leq \mu \leq  \bar{X} + t_{n-1; {1- {\alpha \over 2}}} * {s \over {\sqrt n}} \right] =1-\alpha")
-        st.latex(r"X \sim N(\mu ; \sigma) \quad | \quad \bar{X} \sim N\left(\mu ; {S \over {\sqrt n}}\right) \quad | \quad {\bar{X} - \mu \over {S \over {\sqrt n}}} \sim t_{n-1}")
+        st.latex(r"X \sim N(\mu ; \sigma) \quad | \quad \bar{X} \sim N\left(\mu ; {S \over {\sqrt n}}\right) \quad | \quad T= {\bar{X} - \mu \over {S \over {\sqrt n}}} \sim t_{n-1}")
         
         fig_col1, fig_col2 = st.columns(2)
         with fig_col1:
@@ -225,13 +225,9 @@ elif tipo_ic == "Varianza":
         
         st.markdown(f'<div class="result-box"><b>Intervalo calculado:</b><br>IC [{var_inf:.4f} ≤ σ² ≤ {var_sup:.4f}] = {confianza*100:.2f}%</div>', unsafe_allow_html=True)
         
-        st.write(f"**Grados de libertad (n-1):** {gl}")
-        st.write(f"**Valor Chi² inferior (χ²_inf):** {chi2_inf:.4f}")
-        st.write(f"**Valor Chi² superior (χ²_sup):** {chi2_sup:.4f}")
-        
         st.subheader("Modelos Teóricos y Fórmulas")
         st.latex(r"IC \left[\frac{(n-1)s^2}{\chi^2_{1-{\alpha \over 2}}} \leq \sigma^2 \leq \frac{(n-1)s^2}{\chi^2_{\alpha \over 2}}\right]= 1- \alpha")
-        st.latex(r"X \sim N(\mu ; \sigma) \quad | \quad S^2 \sim \chi^2_n \quad | \quad {(n-1)S^2 \over \sigma^2} \sim \chi^2_{n-1}")
+        st.latex(r"X \sim N(\mu ; \sigma) \quad | \quad S^2 \sim \chi^2_n \quad | \quad \chi^2_{obs} = {(n-1)S^2 \over \sigma^2} \sim \chi^2_{n-1}")
         
         fig_col1, fig_col2 = st.columns(2)
         with fig_col1:
@@ -287,7 +283,7 @@ elif tipo_ic == "Proporción":
         
         st.subheader("Modelos Teóricos y Fórmulas")
         st.latex(r"IC \left[ \hat{p} - Z_{1-{\alpha \over 2}} * \sqrt{\frac{\hat{p}(1-\hat{p})}{n}} \leq p \leq \hat{p} + Z_{1-{\alpha \over 2}} *\sqrt{\frac{\hat{p}(1-\hat{p})}{n}} \right]=1-\alpha")
-        st.latex(r"X \sim Bi(n ; p) \quad | \quad \hat p \sim Bi(n ; p) \quad | \quad {\hat p - p \over {\sqrt {p(1-p) \over n}}} \sim N(0;1)")
+        st.latex(r"X \sim Bi(n ; p) \quad | \quad \hat p \sim Bi(n ; p) \quad | \quad Z={\hat p - p \over {\sqrt {p(1-p) \over n}}} \sim N(0;1)")
         
         fig_col1, fig_col2 = st.columns(2)
         with fig_col1:
