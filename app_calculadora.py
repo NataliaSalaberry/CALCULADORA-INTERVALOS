@@ -343,7 +343,8 @@ elif tipo_ic == "Proporción":
         ax2.legend()
         ax2.grid(True, alpha=0.3)
         st.pyplot(fig2)
-
+        
+#DIF MEDIAS CON VAR CONOCIDAS
 elif tipo_ic == "Diferencia de Medias — Varianzas poblacionales CONOCIDAS":
     st.header(
         "IC para la Diferencia de Medias (μ₁ - μ₂) — Varianzas Poblacionales"
@@ -367,15 +368,8 @@ elif tipo_ic == "Diferencia de Medias — Varianzas poblacionales CONOCIDAS":
     with col2:
         st.subheader("Muestra 2")
         x_barra2 = st.number_input("Media muestral (x̄₂):", value=0.0, key="x2")
-        sigma2 = st.number_input(
-            "Desviación estándar (σ₂):",
-            value=1.0,
-            min_value=0.0001,
-            key="sig2",
-        )
-        n2 = st.number_input(
-            "Tamaño de muestra (n₂):", value=30, min_value=2, key="n2"
-        )
+        sigma2 = st.number_input("Desviación estándar (σ₂):",value=1.0,min_value=0.0001,key="sig2",)
+        n2 = st.number_input("Tamaño de muestra (n₂):", value=30, min_value=2, key="n2")
 
     if st.button("Calcular Intervalo"):
         # Llamada a la función de diferencia de medias con sigmas conocidas
@@ -423,11 +417,12 @@ elif tipo_ic == "Diferencia de Medias — Varianzas poblacionales CONOCIDAS":
             r" \cdot \sqrt{{\sigma_1^2 \over n_1} + {\sigma_2^2 \over n_2}}"
             r" \right] = 1-\alpha"
         )
-        st.latex(
+        st.latex(r"X_1 \sim N(\mu ; \sigma) \quad | \quad X_2 \sim N(\mu ; \sigma) \quad | \quad
             r"Z_{obs} = {(\bar{X}_1 - \bar{X}_2) - (\mu_1 - \mu_2) \over"
             r" \sqrt{{\sigma_1^2 \over n_1} + {\sigma_2^2 \over n_2}}} \sim"
             r" N(0;1)"
         )
+        st.latex(r"X \sim N(\mu ; \sigma) \quad | \quad \bar{X} \sim N\left(\mu ; {\sigma \over {\sqrt n}}\right) \quad | \quad Z_{obs} = {\bar{X} - \mu \over {\sigma \over {\sqrt n}}} \sim N(0;1)")
 
         # Gráfico Densidad Normal
         fig2, ax2 = plt.subplots(figsize=(8, 3.5))
