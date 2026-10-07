@@ -228,7 +228,7 @@ if tipo_ic == "Media — Varianza poblacional CONOCIDA":
         y_vals = stats.norm.pdf(x_vals, 0, 1)
         ax2.plot(x_vals, y_vals, label='N(0,1)', color='darkorange', lw=2)
         x_fill = np.linspace(-Z, Z, 200)
-        ax2.fill_between(x_fill, stats.norm.pdf(x_fill, 0, 1), color='orange', alpha=0.4, label='Confianza')
+        ax2.fill_between(x_fill, stats.norm.pdf(x_fill, 0, 1), color='orange', alpha=0.4, label='Confianza {confianza*100:.2f}%')
         ax2.axvline(-Z, color='coral', linestyle='--', linewidth=1.5, label=f'-Z = {-Z:.4f}')
         ax2.axvline(Z, color='coral', linestyle='--', linewidth=1.5, label=f'Z = {Z:.4f}')
         ax2.set_ylim(0,max(y_vals)+0.05)
